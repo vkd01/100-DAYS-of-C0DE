@@ -28,31 +28,28 @@ using namespace std;
 #define ml                                                             map<ll,ll>
 #define NO_OF_CHARS                                      256
 #define print(s)                                                      cout<<s<<endl;
-// #define lineprint(s)                                                cout<<s<<" "
-// #define nextline                                                     cout<<endl;
-// #define BIN(a,b)                                                    (a<<b)
-// const long long INF = 10e9;
-// const long long MOD = 1e9 + 7;
-// const int MAXN = 2e5;
+#define lineprint(s)                                                cout<<s<<" "
+#define nextline                                                     cout<<endl;
+#define BIN(a,b)                                                    (a<<b)
+const long long INF = 10e9;
+const long long MOD = 1e9 + 7;
+const int MAXN = 2e5;
 
 
-ll CPwithVKD(ll n) {
+void CPwithVKD() {
 
-ll shivam = (ll) n*(n+1)/2;
-vector<vl> vkd(n+1,vl(1,-1));
-for(int i=0;i<n;i++){
-    ll x; cin>>x;
-    vkd[x].pb(i);
+
+ll n,x,s;
+cin>>n>>x>>s;
+ll a[s],b[s];
+loop(i,0,s){
+    cin>>a[i]>>b[i];
+    if(x==a[i]) x = b[i];
+    else if(x==b[i]) x = a[i];
 }
-loop(i,1,n+1){
-     vkd[i].pb(n);
-     loop(j,1,(ll)vkd[i].size()) {
-         ll l = vkd[i][j] - vkd[i][j-1] -1;
-         ll fucked = 0LL;
-         shivam = shivam - max(fucked,l-i+1);
-     }
-}
-return shivam;
+
+print(x)
+
 
 } 
 
@@ -65,9 +62,8 @@ freopen("output.txt", "w", stdout);
 #endif
 
 testLoop{
-int n; cin>>n;
-cout<<CPwithVKD(n);
-cout<<endl;
+
+CPwithVKD();
 
 }
 
