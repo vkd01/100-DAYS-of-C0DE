@@ -40,26 +40,12 @@ bool isPowerofTwo(ll x) {
 return x&&(!(x&(x-1)));
 }
 
-ll gcd(ll a, ll b) {
-if (b == 0)
-return a;
-else
-return gcd(b, a % b);
-}
-
 void CPwithVKD() {
-ll m,n; cin>>n>>m;
 
+ll n,x; cin>>n>>x;
+if((n&1)&& (x%2==0)) print("NO")
 
-if(n%2!=0){
-        if(m-n>=4) cout<<n+1<<" "<<n+2<<" "<<n+3<<" "<<n+4<<endl;
-        else print("-1")
-      }
-      else if(n%2==0){
-        if(m-n>=3) cout<<n<<" "<<n+1<<" "<<n+2<<" "<<n+3<<endl;
-        else print("-1")
-      }
-      else print("-1")
+else print("YES")
 
 
 } 
