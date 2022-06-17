@@ -3,7 +3,7 @@
 Author : Vimal Kumar Dubey
  ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
 
-**************************************************************************************************
+**********************
    You love to watch Doraemon ?? Oh high five .... !! 
 JUST DISCONNECT. Once in a day sometime, sit silently and from all connections, disconnect yourself.]
 
@@ -40,33 +40,63 @@ bool isPowerofTwo(ll x) {
 return x&&(!(x&(x-1)));
 }
 
-ll gcd(ll a, ll b) {
+ll GCD(ll a, ll b) {
 if (b == 0)
 return a;
 else
-return gcd(b, a % b);
+return __gcd(b, a % b);
+}
+ll DFS(ll ind, ll par,map<ll,vl> &dics, vl &arr, vl &v2, vl &final);
+// ll DFS(ll ind, ll par,map<ll,vl> &dics, vl &arr, vl &v2, vl &final){
+
+// ll counts = arr[ind];
+//     ll sum= 0;
+// for(auto& i : dics[ind]){
+//     if(i != par){
+//         ll depth_first_search = DFS(i,ind,dics,arr,v2,final);
+//             sum=sum+depth_first_search;
+//             counts = GCD (counts,depth_first_search);
+//     }
+// }
+// v2[ind] = counts;
+// final[ind] = sum;
+
+// return counts;
+// }
+
+void VIMAL(ll ind, ll par, ll su, map<ll,vl> &vec, vl &arr, vl &inter, vl &final, ll &count){
+
+     count =max(count,su);
+    
+    for(auto &itr : vec[ind]){
+    if(itr != par) VIMAL(itr,ind,su-inter[itr]+final[itr], vec,arr,inter,final,count);
 }
 
-void CPwithVKD() {
+    }
 
- string s; cin >> s;
-    ll n; cin >> n;    
-    vector<bool> vb(10*1000*1000);    
-    ll mul=1;
-    char prev='1';
-    loop(j,0,s.size()){
-        int w = s[j]-'a'+1;
-        if(s[j]==prev) {mul++; w*=mul;}
-        else mul=1;
-        prev = s[j];
-        vb[w] = true;
-    }    
-    loop(a0,0,n){
-        int x;
-        cin >> x;
-        if(vb[x]) print("Yes")
-        else print("No")
-    }    
+
+void CPwithVKD() {
+    ll n; cin>>n;
+    vl arr(n),ent(n),end(n);
+
+    ll res=0;
+    map<ll,vl> dics;
+loop(i,0,n) cin>>arr[i];
+loop(i,0,sqrt(n)) {
+    /*I AM FUCKING GENIUS */
+}
+loop(i,0,n-1){
+    ll a,b; cin>>a>>b;
+  ll u = a-1,v=b-1;
+dics[u].pb(v);
+dics[v].pb(u);
+}
+ll fuck = DFS(0,-1,dics,arr,ent,end);
+    VIMAL(0,-1,end[0],dics,arr,ent,end,res);
+    
+    print(res);
+    
+
 
 
 } 
@@ -79,10 +109,26 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-//testLoop
+testLoop
 
 CPwithVKD();
 
 return 0;
 
+}
+ll DFS(ll ind, ll par,map<ll,vl> &dics, vl &arr, vl &v2, vl &final){
+
+ll counts = arr[ind];
+    ll sum= 0;
+for(auto& i : dics[ind]){
+    if(i != par){
+        ll depth_first_search = DFS(i,ind,dics,arr,v2,final);
+            sum=sum+depth_first_search;
+            counts = GCD (counts,depth_first_search);
+    }
+}
+v2[ind] = counts;
+final[ind] = sum;
+
+return counts;
 }

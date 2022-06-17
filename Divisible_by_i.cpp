@@ -49,24 +49,35 @@ return gcd(b, a % b);
 
 void CPwithVKD() {
 
- string s; cin >> s;
-    ll n; cin >> n;    
-    vector<bool> vb(10*1000*1000);    
-    ll mul=1;
-    char prev='1';
-    loop(j,0,s.size()){
-        int w = s[j]-'a'+1;
-        if(s[j]==prev) {mul++; w*=mul;}
-        else mul=1;
-        prev = s[j];
-        vb[w] = true;
-    }    
-    loop(a0,0,n){
-        int x;
-        cin >> x;
-        if(vb[x]) print("Yes")
-        else print("No")
-    }    
+int n; cin>>n;
+
+int v1[n];
+int v2[n];
+
+for(int i =0;i<n;i++) v1[i] = i+1;
+
+ if(n==2) cout<<"2 1"<<endl;
+
+ else if(n==3) cout<<"2 3 1"<<endl;
+
+else {
+    for(int i=0;i<n/2 +1; i++){
+        int var1 = n - 2*i -1;
+        int var2 = n - 2*i - 2;
+
+        v2[var1] = v1[n-i-1];
+        v2[ var2] = v1[i];
+
+    }
+    for(int i =0;i<n;i++) {
+        cout<<v2[i]<<" ";
+    }
+    nextline
+}
+
+
+
+
 
 
 } 
@@ -79,7 +90,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-//testLoop
+testLoop
 
 CPwithVKD();
 

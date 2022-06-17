@@ -49,26 +49,44 @@ return gcd(b, a % b);
 
 void CPwithVKD() {
 
- string s; cin >> s;
-    ll n; cin >> n;    
-    vector<bool> vb(10*1000*1000);    
-    ll mul=1;
-    char prev='1';
-    loop(j,0,s.size()){
-        int w = s[j]-'a'+1;
-        if(s[j]==prev) {mul++; w*=mul;}
-        else mul=1;
-        prev = s[j];
-        vb[w] = true;
-    }    
-    loop(a0,0,n){
-        int x;
-        cin >> x;
-        if(vb[x]) print("Yes")
-        else print("No")
-    }    
 
 
+long long n1,n2;
+       cin >> n1 >> n2;
+       if(n1>n2) swap(n1,n2);
+       if(n1==0)
+       {
+        if(n2==0) cout << 0 << "\n";
+        else cout << -1 << "\n";
+        return;
+       } 
+        long long res = MAXN;
+        long long p = n2-n1;
+        long long ans1=0;
+        if(p==0)
+        {
+            cout << n2 << "\n"; return;
+        
+        while(abs(n2-n1)>n1)
+        {
+            if(n2<n1)
+                n2*=2;
+            else
+                n1*=2;
+            ans1++;
+            if(n2==n1)
+            {
+                cout << n2+ans1 << "\n"; return;
+            }
+        }
+        if(n1>n2)swap(n1,n2);
+        p=n2-n1;
+        long long ans2 = n1-p;
+        n2=n2-ans2;
+        res=min(res,ans1+ans2+1+n2);
+        cout << res << "\n";
+
+        }
 } 
 
 
@@ -79,7 +97,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-//testLoop
+testLoop
 
 CPwithVKD();
 

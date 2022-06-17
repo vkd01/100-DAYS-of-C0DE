@@ -48,25 +48,47 @@ return gcd(b, a % b);
 }
 
 void CPwithVKD() {
-
- string s; cin >> s;
-    ll n; cin >> n;    
-    vector<bool> vb(10*1000*1000);    
-    ll mul=1;
-    char prev='1';
-    loop(j,0,s.size()){
-        int w = s[j]-'a'+1;
-        if(s[j]==prev) {mul++; w*=mul;}
-        else mul=1;
-        prev = s[j];
-        vb[w] = true;
-    }    
-    loop(a0,0,n){
-        int x;
-        cin >> x;
-        if(vb[x]) print("Yes")
-        else print("No")
-    }    
+   ll n; cin>>n;
+   vl vec;
+   loop(i,0,n){
+    ll x; cin>>x;
+    vec.pb(x);
+   }
+        ll arr[n];
+        unordered_map<int,int>m;
+        int sum=0;
+        for(int i=0;i<n;i++){
+            sum+=vec[i];
+            arr[i]=sum;
+            m[sum]++;
+        }
+        // loop(i,0,n) cout<<arr[i]<<" "; nextline
+        int ele;
+        ll sec=0;
+        for(auto i:m){
+          if(i.second>sec) sec = i.second;
+        }
+        for(auto i : m){
+            if(i.second == sec) {
+                ele = i.first;
+            }
+        }
+        cout<<"pok"<<ele<<endl;
+        int ind1=0,ind2=0;
+        for(int i=0;i<n;i++){
+            if(arr[i]==ele){
+                 ind1 = i;
+                break;
+            }
+        }
+        for(int i=n-1;i>=0;i--){
+            if(arr[i]==ele){
+                ind2 = i; 
+                break;
+            }
+        }
+        //cout<<ind1<<" "<<ind2<<endl;
+        print(ind2-ind1);
 
 
 } 
@@ -79,7 +101,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-//testLoop
+testLoop
 
 CPwithVKD();
 

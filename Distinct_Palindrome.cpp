@@ -31,6 +31,7 @@ using namespace std;
 #define lineprint(s)                                                cout<<s<<" "
 #define nextline                                                     cout<<endl;
 #define BIN(a,b)                                                    (a<<b)
+#define vc                                                              vector<char>
 const long long INF = 10e9;
 const long long MOD = 1e9 + 7;
 const int MAXN = 2e5;
@@ -46,27 +47,113 @@ return a;
 else
 return gcd(b, a % b);
 }
-
+void fuckedup(ll n,ll x) {
+            vc vec(n);
+        char lets = 'a';
+        ll i = 0,j=n-1;
+        ll val = 1;
+        while(i<=j){
+            if(val<=x) {
+                vec[i]=lets;
+                vec[j]=lets;
+                lets++;
+                val++;
+            }
+            else {
+                lets='a';
+                vec[i]=lets;
+                vec[j]=lets;
+                lets++;
+                val++;
+            }
+            i++,j--;
+        }
+        for(auto itr : vec) cout<<itr;
+        nextline
+}
+void ifnisodd(ll n, ll x){
+        ll var = n/2;
+    if(x>var+1) print("-1")
+    else {
+        vc v(n);
+        char lets = 'a';
+        ll p1=0,p2=n-1;
+        ll val = 1;
+        while(p1<=p2) {
+            if(p1<p2 && val <=x) {
+                v[p1]=lets;
+                v[p2]=lets;
+                lets++;
+                val++;
+            }
+            else if(p1<p2&&val>x) {
+                lets = 'a';
+                v[p1]=lets;
+                v[p2]=lets;
+                lets++,val++;
+            }
+            else if(p1==p2 && val<=x){
+                v[p1]=lets;
+            }
+            else if(p1==p2&&val>x){
+                lets='a';
+                v[p1]=lets;
+            }
+            p1++;p2--;
+        }
+        for(auto itr : v) cout<<itr;
+       nextline
+        v.clear();
+    }
+}
 void CPwithVKD() {
 
- string s; cin >> s;
-    ll n; cin >> n;    
-    vector<bool> vb(10*1000*1000);    
-    ll mul=1;
-    char prev='1';
-    loop(j,0,s.size()){
-        int w = s[j]-'a'+1;
-        if(s[j]==prev) {mul++; w*=mul;}
-        else mul=1;
-        prev = s[j];
-        vb[w] = true;
-    }    
-    loop(a0,0,n){
-        int x;
-        cin >> x;
-        if(vb[x]) print("Yes")
-        else print("No")
-    }    
+ll n,x; cin>>n>>x;
+string s1 = "",s2="";
+// // if(n==1 && x==1)  print("a")
+// // else if(n==2 && x==1) print("aa")
+// // else if(n==2 && x==2) print("ab")
+// // else if(n%2==0 && x>(n/2)) print("-1")
+
+// if(x==1) {
+//     for(int i=0;i<n;i+=2){
+//         s1+='a';
+//         if(i+1<n) s1+='a';
+//     }
+//     print(s1)
+    
+// }
+
+
+
+
+// else if(n%2==1 && x> ((n/2 )+ 1)) print("-1")
+
+// else {
+//     ll fuck = 0;
+//     for(int i =0;i<n;i+=2) {
+//         s1 += ('a' + (fuck%x)) ;
+//         if(i+1 <n) {
+//             s2+=('a'+(fuck%x));
+//         }
+//         fuck++;
+//     }
+//     reverse(beg2end(s2));
+//     print(s1 +""+s2)
+// }
+
+if(x>n) print("-1")
+else if(x==1 &&n==1) print("a")
+else if(n&1){
+ifnisodd(n,x);
+   
+}
+
+else {
+    ll temp =n/2;
+    if(x>temp) print("-1")
+    else fuckedup(n,x);
+}
 
 
 } 
@@ -79,7 +166,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-//testLoop
+testLoop
 
 CPwithVKD();
 

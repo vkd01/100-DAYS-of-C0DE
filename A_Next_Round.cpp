@@ -48,25 +48,19 @@ return gcd(b, a % b);
 }
 
 void CPwithVKD() {
-
- string s; cin >> s;
-    ll n; cin >> n;    
-    vector<bool> vb(10*1000*1000);    
-    ll mul=1;
-    char prev='1';
-    loop(j,0,s.size()){
-        int w = s[j]-'a'+1;
-        if(s[j]==prev) {mul++; w*=mul;}
-        else mul=1;
-        prev = s[j];
-        vb[w] = true;
-    }    
-    loop(a0,0,n){
-        int x;
-        cin >> x;
-        if(vb[x]) print("Yes")
-        else print("No")
-    }    
+ll n,k;
+cin>>n>>k;
+ll arr[n];
+ll next=0;
+loop(i,0,n){
+    cin>>arr[i];
+     if(i == k-1) next = arr[i];
+}
+ll ans = 0;
+loop(i,0,n){
+    if(arr[i]>=next && arr[i]!=0) ans++;
+}
+print(ans)
 
 
 } 

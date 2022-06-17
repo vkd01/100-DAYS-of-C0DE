@@ -17,7 +17,7 @@ JUST DISCONNECT. Once in a day sometime, sit silently and from all connections, 
 using namespace std;
 #define testLoop                                                   int t; cin>>t; while(t--)
 #define ll                                                               long long int
-#define loop(k,b,a)                                                for(ll k=b;k<a;k++)
+#define loop(k,b,a)                                                for(ll k=b;k<=a;k++)
 #define rloop(k,b,a)                                               for(ll k=b-1;k>=a;k--)
 #define ff                                                               first
 #define ss                                                             second
@@ -49,25 +49,20 @@ return gcd(b, a % b);
 
 void CPwithVKD() {
 
- string s; cin >> s;
-    ll n; cin >> n;    
-    vector<bool> vb(10*1000*1000);    
-    ll mul=1;
-    char prev='1';
-    loop(j,0,s.size()){
-        int w = s[j]-'a'+1;
-        if(s[j]==prev) {mul++; w*=mul;}
-        else mul=1;
-        prev = s[j];
-        vb[w] = true;
-    }    
-    loop(a0,0,n){
-        int x;
-        cin >> x;
-        if(vb[x]) print("Yes")
-        else print("No")
-    }    
+int x,y; cin>>x>>y;
+int temp= abs(x-y);
 
+ vector<int> res{};
+
+for(int i=1;i<=sqrt(temp);i++) {
+    if(temp%i==0) {
+        if(temp/i==i) res.push_back(1);
+        else res.push_back(2);
+    }
+}
+int vkdisgenius = 0;
+for(auto vkd : res) vkdisgenius+= vkd;
+        cout<<vkdisgenius<<endl;
 
 } 
 
@@ -79,7 +74,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-//testLoop
+testLoop
 
 CPwithVKD();
 

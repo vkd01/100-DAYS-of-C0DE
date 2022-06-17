@@ -46,27 +46,29 @@ return a;
 else
 return gcd(b, a % b);
 }
+int printS(ll ind, ll s, ll sum, ll arr[],ll n) {
+    if(ind ==n) {
+        if(s==sum)  return 1;
+        else return 0;
+    }
+
+    s+=arr[ind];
+
+  ll left =  printS(ind+1,s,sum,arr,n);
+    s-=arr[ind];
+  
+
+ //Not pick condition
+ ll right = printS(ind+1,s,sum,arr,n);
+     return left + right;
+}
 
 void CPwithVKD() {
 
- string s; cin >> s;
-    ll n; cin >> n;    
-    vector<bool> vb(10*1000*1000);    
-    ll mul=1;
-    char prev='1';
-    loop(j,0,s.size()){
-        int w = s[j]-'a'+1;
-        if(s[j]==prev) {mul++; w*=mul;}
-        else mul=1;
-        prev = s[j];
-        vb[w] = true;
-    }    
-    loop(a0,0,n){
-        int x;
-        cin >> x;
-        if(vb[x]) print("Yes")
-        else print("No")
-    }    
+ll n,sum; cin>>n>>sum;
+ll arr[n];
+loop(i,0,n) cin>>arr[i];
+print(printS(0,0,sum,arr,n))
 
 
 } 
@@ -79,7 +81,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-//testLoop
+testLoop
 
 CPwithVKD();
 
