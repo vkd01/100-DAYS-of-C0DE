@@ -61,31 +61,52 @@ return a;
 else
 return gcd(b, a % b);
 }
+ll DB(string str) 
+{ 
+    ll len = 0; 
+    ll p1= (str.size()) / 2 - 1; 
+    while (p1>= 0) 
+    { 
+        if (str[p1] == ')') 
+        { 
+            len++; 
+        } 
+        p1--; 
+    } 
+    p1 = (str.size()) / 2; 
+    while (p1 < str.size()) { 
+        if (str[p1] == '(') len++; 
+        p1++; 
+    } 
+    return len; 
+} 
 
 void CPwithVKD() {
+
 ll n; cin>>n;
-ll arr[n];
-loop(i,0,n) cin>>arr[i];
+string s; cin>>s;
+
+stack<int>stck;
 
 
-ll prefix = arr[0],suffix=0,ans=0;
+ll mid = n/2;
+ll ans1[n] = {},ans2[n]={};
+   
+   loop(i,0,n) {
+    if(s[i]=='(') ans1[i]++;
+    if(i>0) {
+        ans1[i]+=ans1[i-1];
+    }
+   }
+ll ans = n+1;
+for(ll i =n-1;i>=0;i--) {
+    if(s[i]==')') ans2[i]++;
+    if(i<n-1) ans2[i]+=ans2[i+1];
 
-loop(i,1,n){
-    arr[i] -=suffix;
-    if(arr[i] <=prefix) {
-        ans+=(prefix-arr[i]);
-        prefix = arr[i];
-    } 
-    else {
-    ans+=(arr[i]-prefix);
-    suffix+=(arr[i]-prefix);
-   // prefix=arr[i];
+    ans = min(ans,n-2*min(ans1[i],ans2[i]));
 }
-}
-print(ans+abs(prefix))
 
-
-
+print(ans)
 
 } 
 

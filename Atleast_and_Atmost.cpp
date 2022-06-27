@@ -61,30 +61,44 @@ return a;
 else
 return gcd(b, a % b);
 }
-
+void fun(vl &v,int pos,int val){
+    v[pos]+= val;
+}
 void CPwithVKD() {
+
 ll n; cin>>n;
-ll arr[n];
-loop(i,0,n) cin>>arr[i];
+ll y;
+vl minn(n+1,0),leftx(n+1,0),right(n+1,0);
+// memset(minn,0,sizeof minn);
+// memset(leftx,0,sizeof leftx);
+// memset(right,0, sizeof right);
 
+loop(i,0,n){
+    cin>>y;
+//    minn[0]+=1;
+   fun(minn,0,1);
+   fun(minn,y,-1);
+   fun(leftx,0,n-y+1);
+   fun(leftx,y,(-1)*(n-y+1));
+   fun(right,n-1,(n-y));
+   fun(right,y,(-1)*(n-y));
+//    minn[y]-=1;
+//    leftx[0]+=(n-y+1);
+//    leftx[y] -=(n-y+1);
+//    right[n-1] += (n-y);
+//    right[y] -=(n-y);
 
-ll prefix = arr[0],suffix=0,ans=0;
-
-loop(i,1,n){
-    arr[i] -=suffix;
-    if(arr[i] <=prefix) {
-        ans+=(prefix-arr[i]);
-        prefix = arr[i];
-    } 
-    else {
-    ans+=(arr[i]-prefix);
-    suffix+=(arr[i]-prefix);
-   // prefix=arr[i];
 }
+loop(i,1,n+1) {
+    minn[i]+=minn[i-1];
+    leftx[i]+= leftx[i-1];
 }
-print(ans+abs(prefix))
+for(int i=n-1;i>=0;i--) right[i] += right[i+1];
 
-
+loop(i,0,n){
+    ll fuck = leftx[i]+ right[i];
+    cout<<minn[i]<<" "<<fuck<<endl;
+}
 
 
 } 

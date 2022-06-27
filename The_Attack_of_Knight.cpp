@@ -63,28 +63,24 @@ return gcd(b, a % b);
 }
 
 void CPwithVKD() {
-ll n; cin>>n;
-ll arr[n];
-loop(i,0,n) cin>>arr[i];
+ll a,b,x,y; 
+cin>>a>>b;
+cin>>x>>y;
+bool flag = true;
+loop(i,1,9) {
+     loop(j,1,9){
+        ll p = abs(a-i),q = abs(b-j),r=abs(x-i),s = abs(y-j);
 
-
-ll prefix = arr[0],suffix=0,ans=0;
-
-loop(i,1,n){
-    arr[i] -=suffix;
-    if(arr[i] <=prefix) {
-        ans+=(prefix-arr[i]);
-        prefix = arr[i];
-    } 
-    else {
-    ans+=(arr[i]-prefix);
-    suffix+=(arr[i]-prefix);
-   // prefix=arr[i];
+        if((p==1 && q == 2) || (p==2 && q==1)) {
+            if((r==1 && s == 2)|| (r==2)&&(s==1)){
+                print("YES")
+                return;
+            }
+        }
+     }
 }
-}
-print(ans+abs(prefix))
 
-
+ print("NO")
 
 
 } 

@@ -16,7 +16,7 @@ JUST DISCONNECT. Once in a day sometime, sit silently and from all connections, 
 #include<bits/stdc++.h>
 using namespace std;
 #define testLoop                                                   int t; cin>>t; while(t--)
-#define ll                                                               long long int
+#define ll                                                               unsigned long long 
 #define loop(k,b,a)                                                for(ll k=b;k<a;k++)
 #define rloop(k,b,a)                                               for(ll k=b-1;k>=a;k--)
 #define ff                                                               first
@@ -62,27 +62,97 @@ else
 return gcd(b, a % b);
 }
 
-void CPwithVKD() {
-ll n; cin>>n;
-ll arr[n];
-loop(i,0,n) cin>>arr[i];
+static bool comp(const vector<ll>& vec1, const vector<ll>& vec2){
+return vec1[1] < vec2[1];
+}
 
+const int N = 1e5;
+vector<int>adj[N];
+int visited[N];
 
-ll prefix = arr[0],suffix=0,ans=0;
+void DFS(int v){
+int parent = v;
+visited[parent] = 1;
+for(int child: adj[parent]){
+if(visited[child])continue;
+DFS(child); } }
 
-loop(i,1,n){
-    arr[i] -=suffix;
-    if(arr[i] <=prefix) {
-        ans+=(prefix-arr[i]);
-        prefix = arr[i];
+vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+vector<int>res;
+int visited[100001] = {0};
+queue<int>q;
+q.push(0);
+visited[0] = 1;
+while(!q.empty()){
+int parent = q.front();
+q.pop();
+res.push_back(parent);
+for(int child: adj[parent]){
+if(visited[child])continue;
+q.push(child);
+visited[child] = 1;
+}}
+return res;
+}
+
+ll sqr(ll x) {
+    return x*x;
+}
+
+void im_genius(vector<vl>&vkd, vector<vl>&lets,vector<vl>&fuck){
+        for(auto i:vkd) { 
+        auto it = find(beg2end(lets),i); 
+        if( it == lets.end()) { 
+            fuck.pb(i); 
+            lets.pb({i[1],i[0]});    
+        } 
     } 
-    else {
-    ans+=(arr[i]-prefix);
-    suffix+=(arr[i]-prefix);
-   // prefix=arr[i];
 }
+ll vkd_is_fucking_genius(vector<vl>&vkd, vector<vl>&lets,vector<vl>&fuck,ll res){
+          for(auto i:fuck){ 
+        ll p=min(i[0],i[1]); 
+        ll q=max(i[0],i[1]); 
+        if(i[0] == 0 || i[1] == 0) res++; 
+        else{ 
+            loop(j,1,q){ 
+                ll a = j,b = a+p,g = gcd(a,b), l = (a*b)/g;  
+                if((g+l) == q) res+=2; 
+            } 
+        } 
+    } 
+    return res;
 }
-print(ans+abs(prefix))
+void CPwithVKD() {
+
+
+ll n; cin>>n;
+if(n&1) {
+    print("0") return;
+}
+   ll res = 0; 
+    vector<vl> vkd; 
+    ll w = sqrt(n); 
+
+    loop(i,1,w+1){ 
+        ll bsq = n - i*i; 
+        ll b = sqrt(bsq); 
+        if( sqr(b) == bsq) { 
+            vkd.pb({i,b}); 
+        } 
+    } 
+
+    vector<vl> lets,fuck; 
+
+
+    im_genius(vkd,lets,fuck);
+
+   print( vkd_is_fucking_genius(vkd,lets,fuck,res))
+
+
+
+
+
+//print(res)
 
 
 

@@ -62,29 +62,26 @@ else
 return gcd(b, a % b);
 }
 
+ll DP[1000001];
+ll dynamic(int u, int v) {
+    if(u==0 || u==1) return u;
+
+    if(v==1) return u;
+
+    if(v==0) return 1;
+
+    ll fuck = dynamic(u,v/2);
+    fuck=(fuck*fuck);
+    if(v%2) {
+        fuck*=u;
+    }
+    return fuck;
+}
 void CPwithVKD() {
-ll n; cin>>n;
-ll arr[n];
-loop(i,0,n) cin>>arr[i];
 
+ll a,b; cin>>a>>b;
 
-ll prefix = arr[0],suffix=0,ans=0;
-
-loop(i,1,n){
-    arr[i] -=suffix;
-    if(arr[i] <=prefix) {
-        ans+=(prefix-arr[i]);
-        prefix = arr[i];
-    } 
-    else {
-    ans+=(arr[i]-prefix);
-    suffix+=(arr[i]-prefix);
-   // prefix=arr[i];
-}
-}
-print(ans+abs(prefix))
-
-
+print(dynamic(4,a) - 3*(dynamic(2,a)-1) -1)
 
 
 } 
@@ -102,5 +99,5 @@ testLoop
 CPwithVKD();
 
 return 0;
-
 }
+

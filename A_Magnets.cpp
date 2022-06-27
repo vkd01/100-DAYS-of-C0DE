@@ -62,29 +62,52 @@ else
 return gcd(b, a % b);
 }
 
+static bool comp(const vector<ll>& vec1, const vector<ll>& vec2){
+return vec1[1] < vec2[1];
+}
+
+const int N = 1e5;
+vector<int>adj[N];
+int visited[N];
+
+void DFS(int v){
+int parent = v;
+visited[parent] = 1;
+for(int child: adj[parent]){
+if(visited[child])continue;
+DFS(child); } }
+
+vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+vector<int>res;
+int visited[100001] = {0};
+queue<int>q;
+q.push(0);
+visited[0] = 1;
+while(!q.empty()){
+int parent = q.front();
+q.pop();
+res.push_back(parent);
+for(int child: adj[parent]){
+if(visited[child])continue;
+q.push(child);
+visited[child] = 1;
+}}
+return res;
+}
 void CPwithVKD() {
+
 ll n; cin>>n;
+if(n==1){
+    print("1") return;
+}
+ll ans = 1;
 ll arr[n];
 loop(i,0,n) cin>>arr[i];
 
-
-ll prefix = arr[0],suffix=0,ans=0;
-
-loop(i,1,n){
-    arr[i] -=suffix;
-    if(arr[i] <=prefix) {
-        ans+=(prefix-arr[i]);
-        prefix = arr[i];
-    } 
-    else {
-    ans+=(arr[i]-prefix);
-    suffix+=(arr[i]-prefix);
-   // prefix=arr[i];
+loop(i,0,n-1){
+    if(arr[i]!=arr[i+1]) ans++;
 }
-}
-print(ans+abs(prefix))
-
-
+print(ans)
 
 
 } 
@@ -97,7 +120,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-testLoop
+//testLoop
 
 CPwithVKD();
 

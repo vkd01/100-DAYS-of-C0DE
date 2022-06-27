@@ -18,7 +18,7 @@ using namespace std;
 #define testLoop                                                   int t; cin>>t; while(t--)
 #define ll                                                               long long int
 #define loop(k,b,a)                                                for(ll k=b;k<a;k++)
-#define rloop(k,b,a)                                               for(ll k=b-1;k>=a;k--)
+#define rloop(k,b,a)                                               for(ll k=b;k>=a;k--)
 #define ff                                                               first
 #define ss                                                             second
 #define pb                                                             push_back
@@ -61,32 +61,77 @@ return a;
 else
 return gcd(b, a % b);
 }
+ll lcm(ll a, ll  b)
+{
+    return (a*b)/gcd(a,b);
+}
+
+static bool comp(const vector<ll>& vec1, const vector<ll>& vec2){
+return vec1[1] < vec2[1];
+}
+
+
+
+void FillPrefixSuffix(ll prefix[], ll arr[], ll suffix[], ll n){
+    prefix[0] = arr[0];
+   loop(i,1,n)  prefix[i] = gcd(prefix[i-1], arr[i]);
+    suffix[n-1] = arr[n-1];
+   rloop(i,n-2,0) suffix[i] = gcd(suffix[i+1], arr[i]);
+}
+ll GCDoutsideRange(ll l, ll r, ll prefix[],ll suffix[], ll n){
+    if (l==0)
+        return suffix[r+1];
+    if (r==n-1)
+        return prefix[l-1];
+    return gcd(prefix[l-1], suffix[r+1]);
+}
 
 void CPwithVKD() {
+
 ll n; cin>>n;
 ll arr[n];
-loop(i,0,n) cin>>arr[i];
-
-
-ll prefix = arr[0],suffix=0,ans=0;
-
-loop(i,1,n){
-    arr[i] -=suffix;
-    if(arr[i] <=prefix) {
-        ans+=(prefix-arr[i]);
-        prefix = arr[i];
-    } 
-    else {
-    ans+=(arr[i]-prefix);
-    suffix+=(arr[i]-prefix);
-   // prefix=arr[i];
+map(ll,ll) m;
+loop(i,0,n) {
+    cin>>arr[i];
+    m[arr[i]]++;
 }
+//sort(arr,arr+n);
+ll gc = 0;
+loop(i,0,n) {
+    gc = gcd(gc,arr[i]);
 }
-print(ans+abs(prefix))
+//print(gc)
+ll ans = 0;
+if(gc>1) {
+    print(n) return;
+}
 
+//CASE FOR gcd = 1
 
+/*
+************************************
+Logic : Find the GCD of numbers except the ith number in the array... if the value of GCD > 1 then that number will be Strong
 
+      Time Complexity : O(n^2)
 
+      */
+// loop(i,0,n){
+//     ll fuck=0;
+//      loop(j,0,n){
+//         if(i!=j) fuck=gcd(fuck,arr[j]);
+
+//      }
+//      if(fuck!=1) ans++;
+// }
+// print(ans)
+
+ll prefix[n],suffix[n];
+
+FillPrefixSuffix(prefix,arr,suffix,n);
+loop(i,0,n){
+    if(GCDoutsideRange(i,i,prefix,suffix,n) != 1) ans++;
+}
+print(ans)
 } 
 
 

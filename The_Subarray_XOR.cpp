@@ -62,29 +62,54 @@ else
 return gcd(b, a % b);
 }
 
+static bool comp(const vector<ll>& vec1, const vector<ll>& vec2){
+return vec1[1] < vec2[1];
+}
+
 void CPwithVKD() {
-ll n; cin>>n;
-ll arr[n];
+
+ll n,x; cin>>n>>x;
+// vector<ll> v(n);
+// loop(i,0,n) cin>>v[i];
+// //loop(i,0,n) cout<<v[i]<<" ";
+// vl res(n,-1);
+// map(ll,ll) freq;
+// ll count = 0;
+// ll xorr = 0;
+// loop(i,0,v.size()) {
+//     xorr^=v[i];
+//     if(xorr>=x) {
+//        // res.pb(i+1);
+//         count++;
+//         res.pb(count);
+//     }
+
+
+//     if(freq.find(xorr^x) != freq.end()) {
+//         count+=freq[xorr^x];
+//         freq[xorr]+=1;
+//     }
+// }
+// print(count)
+// // print(*max_element(beg2end(res)))
+
+
+ll arr[n]; 
 loop(i,0,n) cin>>arr[i];
+ll p1=0,p2=n-1;
+ll xorr = arr[0]^arr[n-1];
+vl res(n,-1);
+while(p1<=p2){
+
+xorr^=(arr[p1]^arr[p2]);
+
+if(xorr >=x) res.pb(p2-p1);
+ 
+ if(xorr<x) p2--;
 
 
-ll prefix = arr[0],suffix=0,ans=0;
-
-loop(i,1,n){
-    arr[i] -=suffix;
-    if(arr[i] <=prefix) {
-        ans+=(prefix-arr[i]);
-        prefix = arr[i];
-    } 
-    else {
-    ans+=(arr[i]-prefix);
-    suffix+=(arr[i]-prefix);
-   // prefix=arr[i];
 }
-}
-print(ans+abs(prefix))
-
-
+print(*max_element(beg2end(res)))
 
 
 } 

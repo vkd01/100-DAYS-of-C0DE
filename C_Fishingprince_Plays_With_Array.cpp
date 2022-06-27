@@ -62,27 +62,84 @@ else
 return gcd(b, a % b);
 }
 
+static bool comp(const vector<ll>& vec1, const vector<ll>& vec2){
+return vec1[1] < vec2[1];
+}
+
+const int N = 1e5;
+vector<int>adj[N];
+int visited[N];
+
+void DFS(int v){
+int parent = v;
+visited[parent] = 1;
+for(int child: adj[parent]){
+if(visited[child])continue;
+DFS(child); } }
+
+vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+vector<int>res;
+int visited[100001] = {0};
+queue<int>q;
+q.push(0);
+visited[0] = 1;
+while(!q.empty()){
+int parent = q.front();
+q.pop();
+res.push_back(parent);
+for(int child: adj[parent]){
+if(visited[child])continue;
+q.push(child);
+visited[child] = 1;
+}}
+return res;
+}
 void CPwithVKD() {
+
 ll n; cin>>n;
-ll arr[n];
-loop(i,0,n) cin>>arr[i];
+   ll res = 0; 
+    vector<vl> a; 
+    ll w = sqrt(n); 
 
-
-ll prefix = arr[0],suffix=0,ans=0;
-
-loop(i,1,n){
-    arr[i] -=suffix;
-    if(arr[i] <=prefix) {
-        ans+=(prefix-arr[i]);
-        prefix = arr[i];
+    loop(i,1,w+1){ 
+        ll bssquare = n - i*i; 
+        ll b = sqrt(bssquare); 
+        if(b*b == bssquare) { 
+            a.push_back({i,b}); 
+        } 
     } 
-    else {
-    ans+=(arr[i]-prefix);
-    suffix+=(arr[i]-prefix);
-   // prefix=arr[i];
-}
-}
-print(ans+abs(prefix))
+
+    vector<vl> b,c; 
+
+
+    for(auto i:a) { 
+        auto it = find(b.begin(),b.end(),i); 
+        if( it == b.end()) { 
+            c.push_back(i); 
+            b.push_back({i[1],i[0]});    
+        } 
+    } 
+
+
+
+
+      for(auto i:c){ 
+        ll p=min(i[0],i[1]); 
+        ll q=max(i[0],i[1]); 
+        if(i[0] == 0 || i[1] == 0) res++; 
+        else{ 
+            for(int j = 1;j<q;j++){ 
+                int a = j; 
+                int b = a+p; 
+                int g = __gcd(a,b); 
+                int l = (a*b)/g; 
+                if((g+l) == q) res+=2; 
+            } 
+        } 
+    } 
+
+
+print(res)
 
 
 

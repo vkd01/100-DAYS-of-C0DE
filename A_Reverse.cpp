@@ -62,31 +62,44 @@ else
 return gcd(b, a % b);
 }
 
+static bool comp(const vector<ll>& vec1, const vector<ll>& vec2){
+return vec1[1] < vec2[1];
+}
+
 void CPwithVKD() {
-ll n; cin>>n;
-ll arr[n];
-loop(i,0,n) cin>>arr[i];
+         ll n;
+        cin>>n;
+        vl v(n);
+        for(auto &val:v)cin>>val;
+            ll i=0;
+        for(i=0;i<n;i++){
+            if(v[i]!=i+1)break;
+        } 
+        ll x;
+        if(i==n) {
+            loop(j,0,n)cout<<v[j]<<" ";nextline return;
+            }
+       loop(j,0,n){
+            if(v[j]==i+1){
+                x=j;
+                break;
+            }
+        }
+        for(ll j=0;j<n;j++)
+        {
+            if(j<i || j>x)cout<<v[j]<<" ";
+            else
+            {
+                for(ll k=x;k>=i;k--)
+                {
+                    cout<<v[k]<<" ";
+                }
+                j=x;
+            }
+        }
+        cout<<endl;
 
-
-ll prefix = arr[0],suffix=0,ans=0;
-
-loop(i,1,n){
-    arr[i] -=suffix;
-    if(arr[i] <=prefix) {
-        ans+=(prefix-arr[i]);
-        prefix = arr[i];
-    } 
-    else {
-    ans+=(arr[i]-prefix);
-    suffix+=(arr[i]-prefix);
-   // prefix=arr[i];
-}
-}
-print(ans+abs(prefix))
-
-
-
-
+        
 } 
 
 

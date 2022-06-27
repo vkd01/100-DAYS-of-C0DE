@@ -1,16 +1,4 @@
-//                                   Life Goes on and you Learn from it !!  -Steve Jobs
-/*
-Author : Vimal Kumar Dubey
- ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
 
-**************************************************************************************************
-   You love to watch Doraemon ?? Oh high five .... !! 
-JUST DISCONNECT. Once in a day sometime, sit silently and from all connections, disconnect yourself.]
-
--> { / } The Two important days in your life are The day yoy are born and The day you find  out why
-
-*/
-//Nothing is More Honorable than a greatful Heart //
 #undef _GLIBCXX_DEBUG
 
 #include<bits/stdc++.h>
@@ -39,53 +27,70 @@ const long long MOD = 1e9 + 7;
 const int MAXN = 2e5;
 
 
-bool isPowerofTwo(ll x) {
-return x&&(!(x&(x-1)));
-}
-
-ll  MostSignificantBit(ll n){
-if (n == 0)
-return 0;
-ll msb = 0;
-n = n / 2;
-while (n != 0) {
-n /=2;
-msb++;
-}
-return BIN(1,msb);
-}
-
-ll gcd(ll a, ll b) {
-if (b == 0)
-return a;
-else
-return gcd(b, a % b);
+static bool comp(const vector<ll>& vec1, const vector<ll>& vec2){
+return vec1[1] < vec2[1];
 }
 
 void CPwithVKD() {
-ll n; cin>>n;
-ll arr[n];
-loop(i,0,n) cin>>arr[i];
+// ll n; cin>>n;
+// ll arr[n];
+
+// map(ll,ll)m;
+// ll ans = -1;
+// loop(i,0,n) {
+//     cin>>arr[i];
+//     m[arr[i]]++;
+// }
+
+// for(auto i : m)  {
+//     if(i.first==0 and m.size()==1) {
+//         print("0") return;
+//     }
+// }
+// if(n==1){
+//     print("1") return;
+// }
+// ll c = 0;
+// for(auto i : m){
+//     if(i.first == 0) c = i.second;
+// }
+// if(arr[0]==0 && arr[n-1]==0) c--;
+
+// else if(arr[0]!=0 and arr[n-1]!=0) c++;
+
+// ll temp = 2;
+// ans = min(c,temp);
 
 
-ll prefix = arr[0],suffix=0,ans=0;
+// print(ans)
 
-loop(i,1,n){
-    arr[i] -=suffix;
-    if(arr[i] <=prefix) {
-        ans+=(prefix-arr[i]);
-        prefix = arr[i];
-    } 
-    else {
-    ans+=(arr[i]-prefix);
-    suffix+=(arr[i]-prefix);
-   // prefix=arr[i];
-}
-}
-print(ans+abs(prefix))
-
-
-
+    ll n;
+      cin>>n;
+      ll arr[n];
+      for(int i=0;i<n;i++){
+          cin>>arr[i];
+          
+      }ll i=0,cnt=0;
+      if(arr[0]!=0){
+          cnt++;
+      }
+      while(i<n-1){
+          if(arr[i]==0 && arr[i+1]!=0){
+              cnt++;
+              i++;
+              
+         
+              
+          }else{
+              i++;
+          }
+          
+      }if(cnt>=2){
+          cout<<2<<endl;
+      }else{
+          cout<<cnt<<endl;
+      }
+      
 
 } 
 
