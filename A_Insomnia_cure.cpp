@@ -68,11 +68,10 @@ return gcd(b, a % b);
 static bool comp(const vector<ll>& vec1, const vector<ll>& vec2){
 return vec1[1] < vec2[1];
 }
-
 ll LCM(ll arr[], ll n){
-ll ans = arr[0];
-loop(i,1,n)ans = (((arr[i] * ans)) / (gcd(arr[i], ans)));
-return ans;
+    ll ans = arr[0];
+    loop(i,1,n)ans = (((arr[i] * ans)) / (gcd(arr[i], ans)));
+    return ans;
 }
 
 const int N = 1e5;
@@ -105,17 +104,29 @@ return res;
 }
 void CPwithVKD() {
 
-ll n; cin>>n;
-ll arr[n];
-ll ans = 0;
-loop(i,0,n) cin>>arr[i];
-
-if(arr[0]!=0) ans++;
-loop(i,0,n-1){
-    if(arr[i]==0&&arr[i+1]!=0) ans++;
+ll arr[4],n;
+loop(i,0,4) cin>>arr[i];
+cin>>n;
+if(arr[0]==1 || arr[1]==1 || arr[2]==1 || arr[3]==1) {
+   print(n) return;
 }
-//if((arr[n-2]!=0 && arr[n-1]==0)||arr[n-1]!=0 && arr[n-2]==0) ans++;
-(ans>2) ? cout<<"2"<<endl : print(ans)
+else if(arr[0]>n && arr[1]>n && arr[2]>n &&arr[3]>n) {
+   print("0") return;
+}
+ll lcm = LCM(arr , 4);
+//print(lcm)
+
+ll res = 0;
+loop(i,0,n){
+     if((i+1)%arr[0]==0) res++;
+     else if((i+1)%arr[1]==0) res++;
+    else if((i+1)%arr[2]==0) res++;
+     else if((i+1)%arr[3]==0) res++; 
+}
+print(res)
+
+    
+
 
 } 
 
@@ -127,7 +138,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-testLoop
+//testLoop
 
 CPwithVKD();
 

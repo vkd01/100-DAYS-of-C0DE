@@ -107,15 +107,23 @@ void CPwithVKD() {
 
 ll n; cin>>n;
 ll arr[n];
-ll ans = 0;
 loop(i,0,n) cin>>arr[i];
-
-if(arr[0]!=0) ans++;
-loop(i,0,n-1){
-    if(arr[i]==0&&arr[i+1]!=0) ans++;
+ll right =n,left = 0;
+ll tall = arr[0],small = arr[n-1];
+loop(i,0,n){
+    if(arr[i]>tall &&arr[i]!=arr[0]) {
+        tall = arr[i];
+        left = i;
+    }
+     if(arr[i]<=small && arr[i]!=arr[n-1]) {
+        small = arr[i];
+        right = i+1;
+    }
 }
-//if((arr[n-2]!=0 && arr[n-1]==0)||arr[n-1]!=0 && arr[n-2]==0) ans++;
-(ans>2) ? cout<<"2"<<endl : print(ans)
+//cout<<"CHECK"<<left<<right<<endl;
+ll ans = left + n-right;
+if(left>=right) ans--;
+print(ans)
 
 } 
 
@@ -127,7 +135,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-testLoop
+//testLoop
 
 CPwithVKD();
 

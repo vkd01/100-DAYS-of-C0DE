@@ -1,19 +1,4 @@
-//                                   Life Goes on and you Learn from it !!  -Steve Jobs
-/*
-Author : Vimal Kumar Dubey   ᗡ⋊Λ
- ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
 
-**************************************************************************************************
-Remember you were also a novice when you started, 
-hence never be rude to anyone who wants to learn something
-
-   You love to watch Doraemon ?? Oh high five .... !! 
-JUST DISCONNECT. Once in a day sometime, sit silently and from all connections, disconnect yourself.]
-
--> { / } The Two important days in your life are The day yoy are born and The day you find  out why
-
-*/
-//Nothing is More Honorable than a greatful Heart //
 #undef _GLIBCXX_DEBUG
 
 #include<bits/stdc++.h>
@@ -105,17 +90,45 @@ return res;
 }
 void CPwithVKD() {
 
-ll n; cin>>n;
-ll arr[n];
-ll ans = 0;
-loop(i,0,n) cin>>arr[i];
+int n, m, k;
 
-if(arr[0]!=0) ans++;
-loop(i,0,n-1){
-    if(arr[i]==0&&arr[i+1]!=0) ans++;
-}
-//if((arr[n-2]!=0 && arr[n-1]==0)||arr[n-1]!=0 && arr[n-2]==0) ans++;
-(ans>2) ? cout<<"2"<<endl : print(ans)
+  cin >> n >> m >> k;
+
+  int arr[n];
+
+  unordered_map<int,int>mp;
+
+  for (int i = 0; i < n; i++) {
+
+   cin >> arr[i];
+
+   mp[arr[i]]++;
+          
+
+  }
+
+  int lessCnt=0;
+
+  int f=0;
+
+  for(int i=0;i<k;i++){
+
+     if(mp[i]==0 ) {
+
+        f=1;
+     }
+
+              lessCnt+=mp[i];
+  }
+
+  if( m>=k and !f and mp[k]<= (n-m)) {
+
+      cout<<"YES"<<endl;
+  }
+
+  else cout<<"NO"<<endl;
+
+
 
 } 
 

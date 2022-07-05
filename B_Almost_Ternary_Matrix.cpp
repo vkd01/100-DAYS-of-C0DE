@@ -105,17 +105,38 @@ return res;
 }
 void CPwithVKD() {
 
-ll n; cin>>n;
-ll arr[n];
-ll ans = 0;
-loop(i,0,n) cin>>arr[i];
-
-if(arr[0]!=0) ans++;
-loop(i,0,n-1){
-    if(arr[i]==0&&arr[i+1]!=0) ans++;
+ll n,m; cin>>n>>m;
+ll matrix[n][m];
+// vector<vl>matrix;
+// ll i,j;
+// matrix.pb({0,1,1,0});
+// matrix.pb({0,1,1,0});
+// matrix.pb({1,0,0,1});
+// matrix.pb({1,0,0,1});
+// loop(i,0,n){
+//     loop(j,0,m){
+//         cout<<matrix[i%4][j%4]<<" ";
+//     }
+//     nextline
+// }
+loop(i,0,n){
+    loop(j,0,m){
+        if(i%4==0 or i%4 == 3) {
+            if(j%4==0 or j%4==3) matrix[i][j]=0;
+            else matrix[i][j]=1;
+        }
+        else {
+            if(j%4==0 or j%4==3) matrix[i][j]=1;
+            else matrix[i][j]=0;
+        }
+    }
 }
-//if((arr[n-2]!=0 && arr[n-1]==0)||arr[n-1]!=0 && arr[n-2]==0) ans++;
-(ans>2) ? cout<<"2"<<endl : print(ans)
+loop(i,0,n){
+    loop(j,0,m){
+        cout<<matrix[i][j]<<" ";
+    }
+    nextline
+}
 
 } 
 

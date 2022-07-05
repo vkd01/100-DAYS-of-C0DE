@@ -103,19 +103,37 @@ visited[child] = 1;
 }}
 return res;
 }
+
 void CPwithVKD() {
 
-ll n; cin>>n;
-ll arr[n];
-ll ans = 0;
-loop(i,0,n) cin>>arr[i];
+ ll n;
+        cin >> n;
+        vl x(n), v(n);
+        loop(i,0,n) cin >> x[i];
+        loop(i,0,n) cin >> v[i];
+ 
+        vector<pl> collisions;
+        loop(i,0,n)
+            loop(j,0,n)
+                if (x[i] < x[j] && v[i] > 0 && v[j] < 0)
+                    collisions.emplace_back(i, j);
+ 
+        sort(collisions.begin(), collisions.end(), [&] (const pair<int, int> &a, const pair<int, int> &b) -> bool {
+            return (x[a.second] - x[a.first]) * (v[b.first] - v[b.second]) < (x[b.second] - x[b.first]) * (v[a.first] - v[a.second]);
+        });
+ 
+        vl id(n), ret(n);
+        iota(id.begin(), id.end(), 0);
+        
+        for (auto [i, j] : collisions) {
+            ret[id[i]] += (x[j] - x[i]) / (v[i] - v[j]);
+            ret[id[j]] += (x[j] - x[i]) / (v[i] - v[j]);
+            swap(id[i], id[j]);
+        }
+ 
+        for (long long i : ret)
+            cout << i << "\n";
 
-if(arr[0]!=0) ans++;
-loop(i,0,n-1){
-    if(arr[i]==0&&arr[i+1]!=0) ans++;
-}
-//if((arr[n-2]!=0 && arr[n-1]==0)||arr[n-1]!=0 && arr[n-2]==0) ans++;
-(ans>2) ? cout<<"2"<<endl : print(ans)
 
 } 
 

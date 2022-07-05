@@ -104,18 +104,14 @@ visited[child] = 1;
 return res;
 }
 void CPwithVKD() {
-
 ll n; cin>>n;
-ll arr[n];
-ll ans = 0;
-loop(i,0,n) cin>>arr[i];
 
-if(arr[0]!=0) ans++;
-loop(i,0,n-1){
-    if(arr[i]==0&&arr[i+1]!=0) ans++;
-}
-//if((arr[n-2]!=0 && arr[n-1]==0)||arr[n-1]!=0 && arr[n-2]==0) ans++;
-(ans>2) ? cout<<"2"<<endl : print(ans)
+ ll twos=0,x = log2(n);
+loop(i,0,x+1) twos += BIN(1,i);
+
+ll sum = (n*(n+1))/2;
+print(sum-2*twos)
+
 
 } 
 

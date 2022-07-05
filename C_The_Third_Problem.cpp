@@ -103,19 +103,28 @@ visited[child] = 1;
 }}
 return res;
 }
+
+
+const int Y = 1e5;
+ll n, p[Y], position[Y], mn, mx;
+
 void CPwithVKD() {
+   ll res = 1;
 
-ll n; cin>>n;
-ll arr[n];
-ll ans = 0;
-loop(i,0,n) cin>>arr[i];
+        cin >> n;
+        loop(i,0,n)cin >> p[i];
 
-if(arr[0]!=0) ans++;
-loop(i,0,n-1){
-    if(arr[i]==0&&arr[i+1]!=0) ans++;
-}
-//if((arr[n-2]!=0 && arr[n-1]==0)||arr[n-1]!=0 && arr[n-2]==0) ans++;
-(ans>2) ? cout<<"2"<<endl : print(ans)
+        loop(i,0,n) position[p[i]] = i;
+        mn = mx = position[0];
+       loop(i,1,n){
+            if (position[i] > mx) mx = position[i];
+            else if (position[i] < mn) mn = position[i];
+            else res*= (mx - mn + 1 - i) % MOD;
+        }
+
+      print(res)
+    
+
 
 } 
 
