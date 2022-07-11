@@ -105,38 +105,17 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n; cin>>n;
-vl arr;
-set<ll> set;
-ll pos=0,neg=0,zero=0;
-loop(i,0,n){
-     
-  ll x; cin>>x;
-   if(x || !zero) arr.pb(x);
+string s,ans=""; cin>>s;
+loop(i,0,s.size()) {
+    if(s[i]=='9' && i==0) ans+='9';
+    else if (s[i]=='8') ans+='1';
+    else if(s[i]=='7') ans+='2';
+    else if(s[i]=='6') ans+='3';
+    else if(s[i]=='5') ans+='4';
+    else ans+=s[i];
+} 
+print(ans)
 
-    set.insert(x);
-    if(x>0)pos++;
-    else if(x<0) neg++;
-    else zero++;
-}
-
-
-if(pos>2 or neg>2) {
-    print("NO") return;
-}
-
-bool flag = true;
-n = arr.size();
-loop(i,0,n){
-    loop(j,i+1,n){
-        loop(k,j+1,n){
-            if(  set.find(arr[i]+arr[j]+arr[k]) == set.end() ) {
-                flag = false; break;
-            }
-        }
-    }
-}
-(flag) ? cout<<"YES"<<endl : print("NO")
 
 } 
 
@@ -148,7 +127,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-testLoop
+// testLoop
 
 CPwithVKD();
 

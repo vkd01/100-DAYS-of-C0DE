@@ -4,24 +4,17 @@ Author : Vimal Kumar Dubey   ᗡ⋊Λ
  ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
 
 **************************************************************************************************
-PROFILE IS TEMPORARY, SKILLS ARE PERMANENT !!
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Remember you were also a novice when you started, 
 hence never be rude to anyone who wants to learn something
 
+   You love to watch Doraemon ?? Oh high five .... !! 
 JUST DISCONNECT. Once in a day sometime, sit silently and from all connections, disconnect yourself.]
 
--> { / } THOSE WHO DO NOT REMEMBER THE PAST ARE CONDEMNED TO REPEAT IT ---- ?> A dynamic programming expert
+-> { / } The Two important days in your life are The day yoy are born and The day you find  out why
 
 */
 //Nothing is More Honorable than a greatful Heart //
-#undef _GLIBCXX_DEBUG //a compiler flag used to enable debug mode in gcc's C++ Standard Library implementation
-
-#ifdef LOCAL
-#include "algo/debug.h" 
-#else
-#define debug(...) 42
-#endif
+#undef _GLIBCXX_DEBUG
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -103,41 +96,43 @@ dfs(child);
 /*Take action on vertex before exiting the vertex*/
 }
 
+vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+vector<int>res;
+int visited[100001] = {0};
+queue<int>q;
+q.push(0);
+visited[0] = 1;
+while(!q.empty()){
+int parent = q.front();
+q.pop();
+res.push_back(parent);
+for(int child: adj[parent]){
+if(visited[child])continue;
+q.push(child);
+visited[child] = 1;
+}}
+return res;
+}
 void CPwithVKD() {
 
-ll n; cin>>n;
-vl arr;
-set<ll> set;
-ll pos=0,neg=0,zero=0;
-loop(i,0,n){
-     
-  ll x; cin>>x;
-   if(x || !zero) arr.pb(x);
+ll n,k; cin>>n>>k;
+string s; cin>>s;
 
-    set.insert(x);
-    if(x>0)pos++;
-    else if(x<0) neg++;
-    else zero++;
+if(n==1) {
+    print(s) return;
 }
+string temp = s;
+char ans[n];
+loop(i,0,n) ans[i]=s[i];
+loop(i,0,k) {
 
-
-if(pos>2 or neg>2) {
-    print("NO") return;
+loop(i,0,n-1){
+   if(temp[i]=='B' && temp[i+1]=='G')  swap(ans[i],ans[i+1]);
 }
-
-bool flag = true;
-n = arr.size();
-loop(i,0,n){
-    loop(j,i+1,n){
-        loop(k,j+1,n){
-            if(  set.find(arr[i]+arr[j]+arr[k]) == set.end() ) {
-                flag = false; break;
-            }
-        }
-    }
+   loop(i,0,n) temp[i]=ans[i];
 }
-(flag) ? cout<<"YES"<<endl : print("NO")
-
+loop(i,0,n) cout<<ans[i];
+nextline
 } 
 
 
@@ -148,7 +143,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-testLoop
+// testLoop
 
 CPwithVKD();
 

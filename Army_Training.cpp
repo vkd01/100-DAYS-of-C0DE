@@ -4,14 +4,13 @@ Author : Vimal Kumar Dubey   ᗡ⋊Λ
  ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
 
 **************************************************************************************************
-PROFILE IS TEMPORARY, SKILLS ARE PERMANENT !!
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Remember you were also a novice when you started, 
 hence never be rude to anyone who wants to learn something
 
+   You love to watch Doraemon ?? Oh high five .... !! 
 JUST DISCONNECT. Once in a day sometime, sit silently and from all connections, disconnect yourself.]
 
--> { / } THOSE WHO DO NOT REMEMBER THE PAST ARE CONDEMNED TO REPEAT IT ---- ?> A dynamic programming expert
+-> { / } The Two important days in your life are The day yoy are born and The day you find  out why
 
 */
 //Nothing is More Honorable than a greatful Heart //
@@ -103,40 +102,42 @@ dfs(child);
 /*Take action on vertex before exiting the vertex*/
 }
 
+vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+vector<int>res;
+int visited[100001] = {0};
+queue<int>q;
+q.push(0);
+visited[0] = 1;
+while(!q.empty()){
+int parent = q.front();
+q.pop();
+res.push_back(parent);
+for(int child: adj[parent]){
+if(visited[child])continue;
+q.push(child);
+visited[child] = 1;
+}}
+return res;
+}
 void CPwithVKD() {
 
 ll n; cin>>n;
-vl arr;
-set<ll> set;
-ll pos=0,neg=0,zero=0;
+ll attack=0,defense=0;
+ll arr[n];
 loop(i,0,n){
-     
-  ll x; cin>>x;
-   if(x || !zero) arr.pb(x);
-
-    set.insert(x);
-    if(x>0)pos++;
-    else if(x<0) neg++;
-    else zero++;
+    cin>>arr[i];
+    attack+=arr[i];
 }
-
-
-if(pos>2 or neg>2) {
-    print("NO") return;
-}
-
-bool flag = true;
-n = arr.size();
+sort(arr,arr+n);
+    ll ans = INT_MIN;
 loop(i,0,n){
-    loop(j,i+1,n){
-        loop(k,j+1,n){
-            if(  set.find(arr[i]+arr[j]+arr[k]) == set.end() ) {
-                flag = false; break;
-            }
-        }
-    }
+     defense+= (1000-arr[i]);
+    attack-=arr[i];
+
+     ans = max (ans,(attack*defense));
+    
 }
-(flag) ? cout<<"YES"<<endl : print("NO")
+print(ans)
 
 } 
 

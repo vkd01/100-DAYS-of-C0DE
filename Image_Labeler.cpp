@@ -103,55 +103,72 @@ dfs(child);
 /*Take action on vertex before exiting the vertex*/
 }
 
-void CPwithVKD() {
+void CPwithVKD(int x) {
 
-ll n; cin>>n;
-vl arr;
-set<ll> set;
-ll pos=0,neg=0,zero=0;
-loop(i,0,n){
-     
-  ll x; cin>>x;
-   if(x || !zero) arr.pb(x);
-
-    set.insert(x);
-    if(x>0)pos++;
-    else if(x<0) neg++;
-    else zero++;
-}
-
-
-if(pos>2 or neg>2) {
-    print("NO") return;
-}
-
-bool flag = true;
-n = arr.size();
-loop(i,0,n){
-    loop(j,i+1,n){
-        loop(k,j+1,n){
-            if(  set.find(arr[i]+arr[j]+arr[k]) == set.end() ) {
-                flag = false; break;
-            }
+  int a,b;
+        cin>>a>>b;
+        double arr[a];
+        for(int i=0;i<a;i++)
+        cin>>arr[i];
+        sort(arr,arr+a);
+        int v=a-(b-1);
+        int mid=v/2;
+        double sum1=0,sum2=0;
+        if(v%2!=0){
+            sum1=arr[mid];
+            
         }
-    }
-}
-(flag) ? cout<<"YES"<<endl : print("NO")
+        else{
+            double val1=arr[mid];
+            double val2=arr[mid-1];
+            sum1=(val1+val2)/2.0;
+        }
+        for(int i=v;i<a;i++){
+            sum2=sum2+arr[i];
+        }
+        cout<<"Case #"<<x<<": "<<fixed<<setprecision(1)<<sum2+sum1<<endl;
+
 
 } 
 
 
-int32_t main() {
+int main() {
 ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
-#ifndef ONLINE_JUDGE
-freopen("input.txt", "r", stdin);
-freopen("output.txt", "w", stdout);
-#endif
+// #ifndef ONLINE_JUDGE
+// freopen("input.txt", "r", stdin);
+// freopen("output.txt", "w", stdout);
+// #endif
 
-testLoop
-
-CPwithVKD();
-
+int t; cin>>t;
+for(int x = 1;x<=t;x++) CPwithVKD(x);
+// int t; cin>>t;
+// loop(i,1,t+1){
+//     ll n,m;
+//     cin>>n>>m;
+//     vector<int> arr(n);
+//     loop(i,0,n) cin>>arr[i];
+//     sort(arr.begin(), arr.end());
+//     double ans = 0;
+//     if(m > 1)
+//     {
+//         int add = m-1;
+//         for(int i=n-1; i >= n-1 - add + 1; i--)
+//             ans += arr[i];
+//     }
+//     double med = 0;
+//     int elements = n - m + 1;
+//     if(elements%2 == 1)
+//     {
+//         ans += arr[elements/2];
+//     }
+//     else
+//     {
+//         med += arr[elements/2] + arr[elements/2 - 1];
+//         ans += (med)/(2.0);
+//     }
+//     cout<<"Case #"<<t<<": ";
+//     cout<<fixed<<setprecision(6)<<ans<<endl;
+// }
 return 0;
 
 }

@@ -1,4 +1,19 @@
+//                                   Life Goes on and you Learn from it !!  -Steve Jobs
+/*
+Author : Vimal Kumar Dubey   ᗡ⋊Λ
+ ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
 
+**************************************************************************************************
+Remember you were also a novice when you started, 
+hence never be rude to anyone who wants to learn something
+
+   You love to watch Doraemon ?? Oh high five .... !! 
+JUST DISCONNECT. Once in a day sometime, sit silently and from all connections, disconnect yourself.]
+
+-> { / } The Two important days in your life are The day yoy are born and The day you find  out why
+
+*/
+//Nothing is More Honorable than a greatful Heart //
 #undef _GLIBCXX_DEBUG
 
 #include<bits/stdc++.h>
@@ -60,16 +75,26 @@ loop(i,1,n)ans = (((arr[i] * ans)) / (gcd(arr[i], ans)));
 return ans;
 }
 
-const int N = 1e5;
-vector<int>adj[N];
-int visited[N];
+const int N = 1e5 + 10;
+vector<ll> graph[N];
+bool visited[N];
 
-void DFS(int v){
-int parent = v;
-visited[parent] = 1;
-for(int child: adj[parent]){
-if(visited[child])continue;
-DFS(child); } }
+void dfs(ll vertex) {
+/* Take action on vertex after entering the vertex*/
+// lineprint(vertex);
+visited[vertex] = true;
+//if (visited[vertex]) return;
+for (int child : graph[vertex]) {
+if (visited[child]) continue;
+/*Take action on child before entering the child node*/
+// cout << "par" << " " << vertex << " ," << "child" << " " << child << endl;
+
+dfs(child);
+
+/*Take action on child after exiting child node*/
+}
+/*Take action on vertex before exiting the vertex*/
+}
 
 vector<int> bfsOfGraph(int V, vector<int> adj[]) {
 vector<int>res;
@@ -89,45 +114,28 @@ visited[child] = 1;
 return res;
 }
 void CPwithVKD() {
+ll n,m,k; cin>>n>>m>>k;
 
-int n, m, k;
+ll hash[101]={};
+ll count = 0;
+loop(i,0,n){
+    ll x; cin>>x;
+    hash[x]++;
+    if(x==k) count++;
+}
+ll remaining = n-count;
 
-  cin >> n >> m >> k;
+loop(i,0,k) {
+    if(hash[i]==0) {
+        print("NO") return;
+    }
+}
 
-  int arr[n];
-
-  unordered_map<int,int>mp;
-
-  for (int i = 0; i < n; i++) {
-
-   cin >> arr[i];
-
-   mp[arr[i]]++;
-          
-
-  }
-
-  int lessCnt=0;
-
-  int f=0;
-
-  for(int i=0;i<k;i++){
-
-     if(mp[i]==0 ) {
-
-        f=1;
-     }
-
-              lessCnt+=mp[i];
-  }
-
-  if( m>=k and !f and mp[k]<= (n-m)) {
-
-      cout<<"YES"<<endl;
-  }
-
-  else cout<<"NO"<<endl;
-
+if(m<k  || remaining <m ) {
+    print("NO") return;
+}
+print("YES")
+// (remaining>=m) ?cout<<"YES"<<endl : print("NO")
 
 
 } 

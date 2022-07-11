@@ -104,39 +104,77 @@ dfs(child);
 }
 
 void CPwithVKD() {
-
 ll n; cin>>n;
-vl arr;
-set<ll> set;
-ll pos=0,neg=0,zero=0;
-loop(i,0,n){
-     
-  ll x; cin>>x;
-   if(x || !zero) arr.pb(x);
+ll arr[n];
+ll odd_counts= 0,c=0,d=0,sum_except_ones=0,count_except_ones=0;
 
-    set.insert(x);
-    if(x>0)pos++;
-    else if(x<0) neg++;
-    else zero++;
+
+loop(i,0,n){
+     cin>>arr[i];
+     if(arr[i]==1) d++;
+     else {
+        if(arr[i]==2) c++;
+        
+        sum_except_ones+=arr[i];
+        count_except_ones++;
+        if(arr[i]&1) odd_counts++;
+     }
 }
 
+// if(d==1) {
+//     if(b%2==0) {
+//         print("CHEF") return;
+//     }
+// }
 
-if(pos>2 or neg>2) {
-    print("NO") return;
-}
 
-bool flag = true;
-n = arr.size();
-loop(i,0,n){
-    loop(j,i+1,n){
-        loop(k,j+1,n){
-            if(  set.find(arr[i]+arr[j]+arr[k]) == set.end() ) {
-                flag = false; break;
-            }
-        }
+
+
+// f ->> count except ones
+// e->> sum of array elements except ones 
+// d->> ones count
+// c = twos count
+// b == odd counts
+
+if(d==1){
+    if(odd_counts%2==0) {
+        print("CHEF") return;
+    }
+    if(c==0){
+        print("CHEFINA") return;
+    }
+    sum_except_ones-=2;
+    count_except_ones--;
+    if((sum_except_ones-count_except_ones)&1) {
+        print("CHEFINA") return;
+    }
+    else {
+        print("CHEF") return;
     }
 }
-(flag) ? cout<<"YES"<<endl : print("NO")
+
+
+
+else if(d>1){
+    if((sum_except_ones-count_except_ones)&1) {
+        print("CHEF") return;
+    }
+    else {
+        print("CHEFINA") return;
+    }
+}
+if(odd_counts&1) {
+    print("CHEF") return;
+}
+else {
+    print("CHEFINA") return;
+}
+
+
+
+
+
+
 
 } 
 

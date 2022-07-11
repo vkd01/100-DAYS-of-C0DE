@@ -105,38 +105,28 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n; cin>>n;
-vl arr;
-set<ll> set;
-ll pos=0,neg=0,zero=0;
-loop(i,0,n){
-     
-  ll x; cin>>x;
-   if(x || !zero) arr.pb(x);
+string s; cin>>s;
+unordered_set<char>set;
+ll ans = 0;
+loop(i,0,s.size()) {
+    set.insert(s[i]);
 
-    set.insert(x);
-    if(x>0)pos++;
-    else if(x<0) neg++;
-    else zero++;
-}
+    if(set.size()==4   ) {
 
-
-if(pos>2 or neg>2) {
-    print("NO") return;
-}
-
-bool flag = true;
-n = arr.size();
-loop(i,0,n){
-    loop(j,i+1,n){
-        loop(k,j+1,n){
-            if(  set.find(arr[i]+arr[j]+arr[k]) == set.end() ) {
-                flag = false; break;
-            }
-        }
+        ans+=1;
+       // cout<<set.size()<<" ";
+        set.clear();
+        set.insert(s[i]);
     }
+
+
+
 }
-(flag) ? cout<<"YES"<<endl : print("NO")
+if(set.size()!=0) ans++;
+
+//cout<<"ans"<<ans<<endl; //
+print(ans)
+
 
 } 
 

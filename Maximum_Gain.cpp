@@ -105,38 +105,26 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n; cin>>n;
-vl arr;
-set<ll> set;
-ll pos=0,neg=0,zero=0;
-loop(i,0,n){
-     
-  ll x; cin>>x;
-   if(x || !zero) arr.pb(x);
+    ll n,m,k,i,w=0,c,s,t,p=0,q=0;
+    cin>>n;
+    vector<ll>a(n);
+    for(auto&x:a)cin>>x,p+=x;
+    cin>>m;
+    vector<ll>b(m);
+    for(auto&x:b)cin>>x,q+=x;
+    cin>>k;k=n+m-k;
+    for(ll l=0;l<=k;l++){
+        if(l>n || k-l>m)continue;
+        for(i=0,c=0;i<l;i++)c+=a[i];
+        s=c;
+        for(;i<n;i++)c+=a[i]-a[i-l],s=min(s,c);
+        for(i=0,c=0;i<k-l;i++)c+=b[i];
+        t=c;
+        for(;i<m;i++)c+=b[i]-b[i-k+l],t=min(t,c);
+        w=max(w,p-s+q-t);
+    }cout<<w<<'\n';
 
-    set.insert(x);
-    if(x>0)pos++;
-    else if(x<0) neg++;
-    else zero++;
-}
 
-
-if(pos>2 or neg>2) {
-    print("NO") return;
-}
-
-bool flag = true;
-n = arr.size();
-loop(i,0,n){
-    loop(j,i+1,n){
-        loop(k,j+1,n){
-            if(  set.find(arr[i]+arr[j]+arr[k]) == set.end() ) {
-                flag = false; break;
-            }
-        }
-    }
-}
-(flag) ? cout<<"YES"<<endl : print("NO")
 
 } 
 
@@ -148,10 +136,13 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-testLoop
+int t; cin>>t;
+for(int x=1;x<=t;x++){
 
-CPwithVKD();
+cout<<"Case #"<<x<<": "; 
+CPwithVKD(); 
 
+} 
 return 0;
 
 }

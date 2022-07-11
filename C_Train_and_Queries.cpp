@@ -105,38 +105,52 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n; cin>>n;
-vl arr;
-set<ll> set;
-ll pos=0,neg=0,zero=0;
-loop(i,0,n){
-     
-  ll x; cin>>x;
-   if(x || !zero) arr.pb(x);
 
-    set.insert(x);
-    if(x>0)pos++;
-    else if(x<0) neg++;
-    else zero++;
+// nextline
+
+ll n,q; cin>>n>>q;
+ll arr[n];
+map(ll,vl) map;
+
+loop(i,0,n) {
+    cin>>arr[i];
+    map[arr[i]].pb(i);
 }
 
 
-if(pos>2 or neg>2) {
-    print("NO") return;
-}
 
-bool flag = true;
-n = arr.size();
-loop(i,0,n){
-    loop(j,i+1,n){
-        loop(k,j+1,n){
-            if(  set.find(arr[i]+arr[j]+arr[k]) == set.end() ) {
-                flag = false; break;
-            }
-        }
+
+
+
+loop(i,0,q){
+
+
+    ll x,y; cin>>x>>y;
+
+    if(map.find(x) == map.end()    ||  map.find(y) == map.end()) {
+        print("NO") continue;
     }
+
+   ll minx=0,maxy=0;
+
+
+   minx = *min_element(beg2end(map[x]));
+   maxy = *max_element(beg2end(map[y]));
+
+
+//cout<<minx<<endl;
+  // cout<<"minx"<<minx<<" "<<"maxy"<<maxy<<endl;
+
+   if(minx<=maxy) print("YES")
+   else print("NO")
+    
+    
+    
 }
-(flag) ? cout<<"YES"<<endl : print("NO")
+
+
+
+
 
 } 
 
