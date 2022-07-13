@@ -111,18 +111,15 @@ dfs(child);
 /*Take action on vertex before exiting the vertex*/
 }
 
-void CPwithVKD() {
 
+void CPwithVKD() {
 ll n; cin>>n;
-ll arr[n]; 
-ll mx = 0;
 
 loop(i,0,n){
-    cin>>arr[i];
-
-    mx = gcd(mx, abs((i+1)-arr[i]) );
-} 
-print(mx)
+    cout<<char(   (i)%26  +'a'   ); 
+     
+}
+nextline
 
 
 

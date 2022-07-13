@@ -112,18 +112,18 @@ dfs(child);
 }
 
 void CPwithVKD() {
-
 ll n; cin>>n;
-ll arr[n]; 
-ll mx = 0;
+ll arr[n];
+loop(i,0,n) cin>>arr[i];
 
-loop(i,0,n){
-    cin>>arr[i];
+sort(arr,arr+n);
 
-    mx = gcd(mx, abs((i+1)-arr[i]) );
-} 
-print(mx)
-
+map(ll,ll) map;
+loop(i,0,n) {
+    map[arr[i]] =i;
+    for(auto i : map)  cout<<i.ff<<" "<<i.ss<<endl;
+}
+nextline
 
 
 } 

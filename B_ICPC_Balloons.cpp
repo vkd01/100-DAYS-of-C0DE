@@ -114,16 +114,19 @@ dfs(child);
 void CPwithVKD() {
 
 ll n; cin>>n;
-ll arr[n]; 
-ll mx = 0;
+string s; cin>>s;
+map(char,ll) map;
+loop(i,0,n) {
+    map[s[i]]++;
+}
 
-loop(i,0,n){
-    cin>>arr[i];
+ll ans = 0;
 
-    mx = gcd(mx, abs((i+1)-arr[i]) );
-} 
-print(mx)
-
+for(auto i : map) {
+     if(i.ss==1) ans+=2;
+     else if(i.ss >1) ans+= (i.ss)+1;
+}
+print(ans)
 
 
 } 

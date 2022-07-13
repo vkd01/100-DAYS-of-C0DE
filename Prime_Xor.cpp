@@ -4,17 +4,24 @@ Author : Vimal Kumar Dubey   ᗡ⋊Λ
  ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
 
 **************************************************************************************************
+PROFILE IS TEMPORARY, SKILLS ARE PERMANENT !!
+//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Remember you were also a novice when you started, 
 hence never be rude to anyone who wants to learn something
 
-   You love to watch Doraemon ?? Oh high five .... !! 
 JUST DISCONNECT. Once in a day sometime, sit silently and from all connections, disconnect yourself.]
 
--> { / } The Two important days in your life are The day yoy are born and The day you find  out why
+-> { / } THOSE WHO DO NOT REMEMBER THE PAST ARE CONDEMNED TO REPEAT IT ---- ?> A dynamic programming expert
 
 */
 //Nothing is More Honorable than a greatful Heart //
-#undef _GLIBCXX_DEBUG
+#undef _GLIBCXX_DEBUG //a compiler flag used to enable debug mode in gcc's C++ Standard Library implementation
+
+#ifdef LOCAL
+#include "algo/debug.h" 
+#else
+#define debug(...) 42
+#endif
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -74,7 +81,13 @@ ll ans = arr[0];
 loop(i,1,n)ans = (((arr[i] * ans)) / (gcd(arr[i], ans)));
 return ans;
 }
-
+bool isPrime(ll n) {
+if (n <= 1) return false;
+loop(i,2,sqrt(n)+1)
+if (n % i == 0)
+return false;
+return true;
+}
 const int N = 1e5 + 10;
 vector<ll> graph[N];
 bool visited[N];
@@ -96,41 +109,36 @@ dfs(child);
 /*Take action on vertex before exiting the vertex*/
 }
 
-vector<int> bfsOfGraph(int V, vector<int> adj[]) {
-vector<int>res;
-int visited[100001] = {0};
-queue<int>q;
-q.push(0);
-visited[0] = 1;
-while(!q.empty()){
-int parent = q.front();
-q.pop();
-res.push_back(parent);
-for(int child: adj[parent]){
-if(visited[child])continue;
-q.push(child);
-visited[child] = 1;
-}}
-return res;
-}
 void CPwithVKD() {
 
 ll x,y; cin>>x>>y;
-ll a,b,c;
-a=2;
-if(x&1 && y&1)  b = a^x,c=a^y;
-else {
-  if(x%2==0) {
-    c=a^y;
-    b=c^x;
-  }
-  if(y%2==0){
-    b=a^x;
-    c=b^y;
-  }
+ll a=0,b=0,c=0;
+ll v[3]={};
+
+if(x&1 && y&1) {
+    b=2;
+    a=2^x;
+    c = 2^y;
+    v[0]=a; v[1]=b; v[2]=c;
 }
-ll ans1 = min(b,c),ans2 = max(b,c);
-cout<<a<<" "<<ans1<<" "<<ans2<<endl;
+else if(x&1 &&  !(y&1)) {
+    a=2;
+    b = 2^x;
+    c = b^y;
+    v[0]=a; v[1]=b; v[2]=c;
+}
+else if(!(x&1) &&  y&1) {
+    c=2;
+    a = 2^x^y;
+    b = 2^y;
+    v[0]=a; v[1]=b; v[2]=c;
+}
+
+
+
+
+sort(v,v+3);
+cout<<v[0]<<" "<<v[1]<<" "<<v[2]; nextline
 
 
 

@@ -113,17 +113,29 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n; cin>>n;
-ll arr[n]; 
-ll mx = 0;
+int n; cin>>n;
+ll arr[n];
+loop(i,0,n) cin>>arr[i];
 
-loop(i,0,n){
-    cin>>arr[i];
+loop(i,0,n) {
+    ll moves; cin>>moves;
+    string s; cin>>s;
+    ll wheel = arr[i];
 
-    mx = gcd(mx, abs((i+1)-arr[i]) );
-} 
-print(mx)
-
+    //print(s)
+    loop(i,0,moves) {
+        if(s[i]=='D') {
+             if(wheel==9) wheel=0;
+             else wheel++;
+        }
+        else if(s[i]=='U') {
+            if(wheel == 0) wheel = 9;
+            else wheel--;
+        }
+    }
+    cout<<wheel<<" ";
+}
+nextline
 
 
 } 

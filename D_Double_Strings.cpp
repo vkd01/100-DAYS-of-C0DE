@@ -114,16 +114,31 @@ dfs(child);
 void CPwithVKD() {
 
 ll n; cin>>n;
-ll arr[n]; 
-ll mx = 0;
 
+vector<string> v;
+map(string,ll) map;
 loop(i,0,n){
-    cin>>arr[i];
+    string x; cin>>x;
+    v.pb(x);
+    map[x]++;
+}
+string ans="";
+loop(i,0,n){
+    string temp = v[i];
+        bool flag = false;
+     loop(i,0,temp.size()) {
+        string u = temp.substr(0,i);
+        string v = temp.substr(i,temp.size()-i);
+    //    cout<<u<<" "<<v<<endl;
+         if(map.find(u) != map.end()  && map.find(v) != map.end()) {
+            flag = true; break;
+         }
+     }
+     (flag) ? ans+='1' : ans+='0';
 
-    mx = gcd(mx, abs((i+1)-arr[i]) );
-} 
-print(mx)
+}
 
+print(ans)
 
 
 } 

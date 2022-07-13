@@ -113,17 +113,10 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n; cin>>n;
-ll arr[n]; 
-ll mx = 0;
-
-loop(i,0,n){
-    cin>>arr[i];
-
-    mx = gcd(mx, abs((i+1)-arr[i]) );
-} 
-print(mx)
-
+string s; cin>>s;
+convert_toupper(s);
+if(s=="YES") print("YES")
+else print("NO")
 
 
 } 

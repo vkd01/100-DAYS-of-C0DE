@@ -4,14 +4,13 @@ Author : Vimal Kumar Dubey   ᗡ⋊Λ
  ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
 
 **************************************************************************************************
-PROFILE IS TEMPORARY, SKILLS ARE PERMANENT !!
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Remember you were also a novice when you started, 
 hence never be rude to anyone who wants to learn something
 
+   You love to watch Doraemon ?? Oh high five .... !! 
 JUST DISCONNECT. Once in a day sometime, sit silently and from all connections, disconnect yourself.]
 
--> { / } THOSE WHO DO NOT REMEMBER THE PAST ARE CONDEMNED TO REPEAT IT ---- ?> A dynamic programming expert
+-> { / } The Two important days in your life are The day yoy are born and The day you find  out why
 
 */
 //Nothing is More Honorable than a greatful Heart //
@@ -65,14 +64,6 @@ msb++;
 return BIN(1,msb);
 }
 
-bool isPrime(ll n) {
-if (n <= 1) return false;
-loop(i,2,sqrt(n))
-if (n % i == 0)
-return false;
-return true;
-}
-
 ll gcd(ll a, ll b) {
 if (b == 0)
 return a;
@@ -111,18 +102,78 @@ dfs(child);
 /*Take action on vertex before exiting the vertex*/
 }
 
+vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+vector<int>res;
+int visited[100001] = {0};
+queue<int>q;
+q.push(0);
+visited[0] = 1;
+while(!q.empty()){
+int parent = q.front();
+q.pop();
+res.push_back(parent);
+for(int child: adj[parent]){
+if(visited[child])continue;
+q.push(child);
+visited[child] = 1;
+}}
+return res;
+}
+ll hpowerof2(ll n){
+    ll res = 0;
+    for(ll i = n; i>=1;i--){
+        if(isPowerofTwo(i)) {
+            res = i;
+            break;
+        }
+    }
+    return res;
+}
 void CPwithVKD() {
 
 ll n; cin>>n;
-ll arr[n]; 
-ll mx = 0;
 
-loop(i,0,n){
-    cin>>arr[i];
+ll arr[n+1];
+loop(i,0,n+1) cin>>arr[i];
 
-    mx = gcd(mx, abs((i+1)-arr[i]) );
-} 
-print(mx)
+ll ans[3] = {0,0,0};
+for(int i=hpowerof2(n);i>0;i/=2){
+    ll diff = arr[i]-arr[0];
+    if(diff<0) {
+        diff*=-1;
+        ll ct = diff/i;
+        if(ct==1){
+            ct=2;
+            if((ans[0]^i)<=n) {
+                ans[0]^=i;
+                ct--;
+            }
+            if(ct and (ans[1]^i) <=n) {
+                ans[1]^=i;
+                ct--;
+            }
+            if(ct>0 and (ans[2]^i)<=n) {
+                ans[2]^=i;
+            }
+        }
+        else if(ct==3) {
+                ans[0]^=i;
+                ans[1]^=i;
+                ans[2]^=i;
+        }
+    }
+    else {
+        ll ct = diff/i;
+        if(ct==1){
+            if((ans[0]^i)<=n) ans[0]^=i;
+            else if((ans[1]^i)<=n) ans[1]^=i;
+            else ans[2]^=i;
+        }
+    }
+    sort(ans,ans+3);
+}
+cout<<ans[0]<<" "<<ans[1]<<" "<<ans[2]<<endl;
+
 
 
 

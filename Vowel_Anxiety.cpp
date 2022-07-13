@@ -110,20 +110,53 @@ dfs(child);
 }
 /*Take action on vertex before exiting the vertex*/
 }
+bool isVowel(char x) {
+     if(x=='a' || x=='e' || x=='i' || x=='o' || x=='u')  return true;
+     return false;
+}
+
 
 void CPwithVKD() {
-
 ll n; cin>>n;
-ll arr[n]; 
-ll mx = 0;
+string s; cin>>s;
 
-loop(i,0,n){
-    cin>>arr[i];
+//BRUTEFORCE
+// loop(i,0,n){
+//     if(s[i]=='a' || s[i]=='e' || s[i]=='i' || s[i]=='o' || s[i]=='u') {
+//         reverse(s.begin(),s.begin()+i);
+//         //break;
+//     }
+// }
 
-    mx = gcd(mx, abs((i+1)-arr[i]) );
-} 
-print(mx)
+//OPTIMISED
 
+string fuck1="",fuck2="";
+ll flag = 1;
+
+rloop(i,n,0){
+    if(isVowel(s[i])) {
+        if(flag==1) {
+            fuck1+=s[i];
+          //   flag=false;
+          flag = 1-flag;
+        }
+        
+        else fuck2+=s[i];
+        
+
+    }
+    else {
+        if(flag==1) fuck1+=s[i];
+        else fuck2+=s[i];
+    }
+   
+}
+reverse(beg2end(fuck1));
+string ans=fuck2+fuck1;
+
+
+
+print(ans)
 
 
 } 
