@@ -1,4 +1,7 @@
 //                                   Life Goes on and you Learn from it !!  -Steve Jobs
+
+//STAY MOTIVATED BY THE FEAR OF BEING AVERAGE !!
+
 /*
 Author : Vimal Kumar Dubey   ᗡ⋊Λ
  ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
@@ -47,6 +50,7 @@ using namespace std;
 const long long INF = 10e9;
 const long long MOD = 1e9 + 7;
 const int MAXN = 2e5;
+/*------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 bool isPowerofTwo(ll x) {
@@ -113,20 +117,48 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n,k,ans=0; cin>>n>>k;
+ll n; cin>>n;
 
-while(k > 0) {
-    ll curr = 0;
-    if(  (k&1) == (n&1) ) curr = min(n,k); // If the parity is same, we are filling n bits
-    else curr = min(k,n-1); //Else we are filling n-1  bits
+ll v[n];
+loop(i,0,n) cin>>v[i];
 
-    k-=curr;
-    k/=2;
-    ans+=curr;
+// if(n==2) {
+//     sort(v,v+n);
+//     (v[1]%v[0]==0) ? cout<<"YES"<<endl : print("NO")
+//     return;
+// }
+// bool multiple = true;
+
+// ll diff[n-1];
+// loop(i,0,n-1) {
+//     diff[i] = v[i+1]-v[i]; 
+// }
+
+// //sort(diff,diff+n);
+
+// loop(i,0,n-2) {
+//     //cout<<diff[i+1]<<" "<<diff[i]<<endl;
+//     if(diff[i+1]%diff[i] != 0) {
+//         multiple = false; break;
+//     }
+// }
+
+
+// //for(auto i : diff) cout<<i<<" "; nextline
+
+// (multiple) ? cout<<"YES"<<endl : print("NO")
+
+ll first = v[0];
+bool flag = true;
+
+
+loop(i,0,n) {
+    if(v[i]%first != 0) {
+        flag = false;
+        break;
+    }
 }
-print(ans)
-
-
+(flag) ? cout << "YES" << endl : print("NO")
 } 
 
 

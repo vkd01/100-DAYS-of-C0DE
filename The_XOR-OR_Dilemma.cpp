@@ -113,18 +113,12 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n,k,ans=0; cin>>n>>k;
-
-while(k > 0) {
-    ll curr = 0;
-    if(  (k&1) == (n&1) ) curr = min(n,k); // If the parity is same, we are filling n bits
-    else curr = min(k,n-1); //Else we are filling n-1  bits
-
-    k-=curr;
-    k/=2;
-    ans+=curr;
+ll n,x; cin>>n>>x;
+if(n==x) {
+    print("-1") return;
 }
-print(ans)
+
+
 
 
 } 

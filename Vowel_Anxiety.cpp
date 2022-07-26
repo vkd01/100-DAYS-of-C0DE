@@ -138,12 +138,11 @@ rloop(i,n,0){
         if(flag==1) {
             fuck1+=s[i];
           //   flag=false;
-          flag = 1-flag;
         }
         
         else fuck2+=s[i];
         
-
+        flag = 1-flag;
     }
     else {
         if(flag==1) fuck1+=s[i];

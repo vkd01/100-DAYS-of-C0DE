@@ -1,4 +1,7 @@
 //                                   Life Goes on and you Learn from it !!  -Steve Jobs
+
+//STAY MOTIVATED BY THE FEAR OF BEING AVERAGE !!
+
 /*
 Author : Vimal Kumar Dubey   ᗡ⋊Λ
  ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
@@ -47,6 +50,7 @@ using namespace std;
 const long long INF = 10e9;
 const long long MOD = 1e9 + 7;
 const int MAXN = 2e5;
+/*------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 bool isPowerofTwo(ll x) {
@@ -111,26 +115,31 @@ dfs(child);
 /*Take action on vertex before exiting the vertex*/
 }
 
+#define FMOD 998244353
+ll fac[1000010], inv[1000010], finv[1000010];
+ll Cfac(long long x, long long y) {
+  if (x < 0 || y > x)
+    return 0;
+  return fac[x] * finv[y] % FMOD * finv[x - y] % FMOD;
+}
 void CPwithVKD() {
 
-ll n,k,ans=0; cin>>n>>k;
+ll n,x,c0=0,c1=0,t=0;
+  cin >> n;
+  loop(i,0,n) {
+    cin >> x;
+    c0+=x==0;
+    c1+=x==1;
+  }
+loop(i,0,c1+1) t=(t+i*Cfac(c1+c0-i,c0))%FMOD;
+  cout << (((t*(c0+1)-Cfac(c1+c0-2,c0-1))%FMOD+FMOD)%MOD+Cfac(c1+c0-2,c0-1))*fac[c1]%FMOD*fac[c0]%FMOD << endl;
 
-while(k > 0) {
-    ll curr = 0;
-    if(  (k&1) == (n&1) ) curr = min(n,k); // If the parity is same, we are filling n bits
-    else curr = min(k,n-1); //Else we are filling n-1  bits
-
-    k-=curr;
-    k/=2;
-    ans+=curr;
-}
-print(ans)
 
 
 } 
 
 
-int32_t main() {
+signed main() {
 ios_base::sync_with_stdio(0); cin.tie(0); cout.tie(0);
 #ifndef ONLINE_JUDGE
 freopen("input.txt", "r", stdin);

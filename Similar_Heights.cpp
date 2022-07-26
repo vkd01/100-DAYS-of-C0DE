@@ -113,18 +113,53 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n,k,ans=0; cin>>n>>k;
+ll n; cin>>n;
+ll arr[n];
 
-while(k > 0) {
-    ll curr = 0;
-    if(  (k&1) == (n&1) ) curr = min(n,k); // If the parity is same, we are filling n bits
-    else curr = min(k,n-1); //Else we are filling n-1  bits
-
-    k-=curr;
-    k/=2;
-    ans+=curr;
+map(ll,ll) map;
+loop(i,0,n) {
+    cin>>arr[i];
+    map[arr[i]]++;
 }
-print(ans)
+sort(arr,arr+n);
+ll mx = arr[n-1];
+
+ll count = 0;
+// vl even,odd;
+// for(auto i: map) {
+//     if(i.ss==1) count++;
+
+//     if(i.ss%2==0) even.pb(i.ss);
+//     else if(i.ss %2==1) odd.pb(i.ss);
+// }
+
+// ll os = odd.size();
+// ll es = even.size();
+// cout<<"OS"<<os<<endl;
+// if(count==1 &&   ( ( (os-1)%2==0 && os>1) || es%2==0)) {
+//     print("2") return;
+// }
+// if(count&1) print(count/2+1)
+// else print(count/2)
+
+ll mxc = 0;
+for(auto i : map){
+    if(i.ss==1) count++;
+    mxc = max(mxc,i.ss);
+}
+if(count&1){
+    ll y = (count+1)/2;
+    if(map[mx]==1) {
+        if(mxc==2) y++;
+    }
+    print(y)
+}
+else {
+    ll ans = count/2;
+    print(ans)
+}
+
+
 
 
 } 

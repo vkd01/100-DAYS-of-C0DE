@@ -1,4 +1,7 @@
 //                                   Life Goes on and you Learn from it !!  -Steve Jobs
+
+//STAY MOTIVATED BY THE FEAR OF BEING AVERAGE !!
+
 /*
 Author : Vimal Kumar Dubey   ᗡ⋊Λ
  ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
@@ -47,6 +50,7 @@ using namespace std;
 const long long INF = 10e9;
 const long long MOD = 1e9 + 7;
 const int MAXN = 2e5;
+/*------------------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 bool isPowerofTwo(ll x) {
@@ -113,19 +117,18 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n,k,ans=0; cin>>n>>k;
+ll n; cin>>n;
+ll arr[n];
+loop(i,0,n) cin>>arr[i];
+bool flag = false;
 
-while(k > 0) {
-    ll curr = 0;
-    if(  (k&1) == (n&1) ) curr = min(n,k); // If the parity is same, we are filling n bits
-    else curr = min(k,n-1); //Else we are filling n-1  bits
-
-    k-=curr;
-    k/=2;
-    ans+=curr;
+sort(arr,arr+n);
+loop(i,0,n-1) {
+    if(arr[i+1]-arr[i] > 1) {
+        flag = true; break;
+    }
 }
-print(ans)
-
+(flag) ? cout<<"NO"<<endl : print("YES")
 
 } 
 

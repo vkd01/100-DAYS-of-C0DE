@@ -113,18 +113,12 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n,k,ans=0; cin>>n>>k;
+ll x,y; cin>>x>>y;
 
-while(k > 0) {
-    ll curr = 0;
-    if(  (k&1) == (n&1) ) curr = min(n,k); // If the parity is same, we are filling n bits
-    else curr = min(k,n-1); //Else we are filling n-1  bits
+ll mn = min(x,y);
 
-    k-=curr;
-    k/=2;
-    ans+=curr;
-}
-print(ans)
+ll mx = max(x,y);
+cout<<mn<<" "<<(mx-mn)/2<<endl;
 
 
 } 
@@ -137,7 +131,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-testLoop
+// testLoop
 
 CPwithVKD();
 

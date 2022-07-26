@@ -91,41 +91,49 @@ return ans;
 }
 
 const int N = 1e5 + 10;
-vector<ll> graph[N];
-bool visited[N];
+vector<vector<bool>> visited;
 
-void dfs(ll vertex) {
-/* Take action on vertex after entering the vertex*/
-// lineprint(vertex);
-visited[vertex] = true;
-//if (visited[vertex]) return;
-for (int child : graph[vertex]) {
-if (visited[child]) continue;
-/*Take action on child before entering the child node*/
-// cout << "par" << " " << vertex << " ," << "child" << " " << child << endl;
 
-dfs(child);
+ll DFS(ll i, ll j, vector<vector<ll>> &v){
 
-/*Take action on child after exiting child node*/
-}
-/*Take action on vertex before exiting the vertex*/
+    ll r = v.size(),c = v[0].size(),length=0;
+    if(i<0 || j<0 || i>=r || j>=c) return 0; // Overflow Control
+    
+    if(v[i][j] !=1 or visited[i][j]==true) return 0;  //Base Case
+    
+    visited[i][j] = true; //Marking the Nodes true which we have already Visited
+     length += DFS(i+1,j,v);
+     length += DFS(i-1,j,v);
+     length += DFS(i,j-1,v);
+     length += DFS(i,j+1,v);
+
+    
+return length+1;
+
 }
 
 void CPwithVKD() {
 
-ll n,k,ans=0; cin>>n>>k;
+ll r,c; cin>>r>>c;
+vector<vector<ll>> graph(r,vector<ll>(c,0));
+visited.assign(r,vector<bool>(c,false));
 
-while(k > 0) {
-    ll curr = 0;
-    if(  (k&1) == (n&1) ) curr = min(n,k); // If the parity is same, we are filling n bits
-    else curr = min(k,n-1); //Else we are filling n-1  bits
-
-    k-=curr;
-    k/=2;
-    ans+=curr;
+loop(i,0,r){
+    loop(j,0,c){
+        cin>>graph[i][j];
+    }
 }
-print(ans)
 
+ll mx = 0;
+
+loop(i,0,r){
+    loop(j,0,c){
+        mx = max(mx, DFS(i,j,graph) );
+    }
+}
+
+
+print(mx)
 
 } 
 
@@ -137,7 +145,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-testLoop
+// testLoop
 
 CPwithVKD();
 

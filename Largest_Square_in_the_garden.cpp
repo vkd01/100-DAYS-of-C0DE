@@ -4,14 +4,13 @@ Author : Vimal Kumar Dubey   ᗡ⋊Λ
  ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
 
 **************************************************************************************************
-PROFILE IS TEMPORARY, SKILLS ARE PERMANENT !!
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Remember you were also a novice when you started, 
 hence never be rude to anyone who wants to learn something
 
+   You love to watch Doraemon ?? Oh high five .... !! 
 JUST DISCONNECT. Once in a day sometime, sit silently and from all connections, disconnect yourself.]
 
--> { / } THOSE WHO DO NOT REMEMBER THE PAST ARE CONDEMNED TO REPEAT IT ---- ?> A dynamic programming expert
+-> { / } The Two important days in your life are The day yoy are born and The day you find  out why
 
 */
 //Nothing is More Honorable than a greatful Heart //
@@ -65,14 +64,6 @@ msb++;
 return BIN(1,msb);
 }
 
-bool isPrime(ll n) {
-if (n <= 1) return false;
-loop(i,2,sqrt(n))
-if (n % i == 0)
-return false;
-return true;
-}
-
 ll gcd(ll a, ll b) {
 if (b == 0)
 return a;
@@ -91,7 +82,7 @@ return ans;
 }
 
 const int N = 1e5 + 10;
-vector<ll> graph[N];
+vector<ll> graph4[N];
 bool visited[N];
 
 void dfs(ll vertex) {
@@ -99,7 +90,7 @@ void dfs(ll vertex) {
 // lineprint(vertex);
 visited[vertex] = true;
 //if (visited[vertex]) return;
-for (int child : graph[vertex]) {
+for (int child : graph4[vertex]) {
 if (visited[child]) continue;
 /*Take action on child before entering the child node*/
 // cout << "par" << " " << vertex << " ," << "child" << " " << child << endl;
@@ -111,22 +102,67 @@ dfs(child);
 /*Take action on vertex before exiting the vertex*/
 }
 
+vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+vector<int>res;
+int visited[100001] = {0};
+queue<int>q;
+q.push(0);
+visited[0] = 1;
+while(!q.empty()){
+int parent = q.front();
+q.pop();
+res.push_back(parent);
+for(int child: adj[parent]){
+if(visited[child])continue;
+q.push(child);
+visited[child] = 1;
+}}
+return res;
+}
+const ll MXO = 1e4;
+vector<vector<char>> graph_dp(MXO,vector<char>(MXO,'0'));
+
+
+int maximalSquare(vector<vector<char>>& matrix) {
+        vector<vector<int>> dp(matrix.size(),vector<int>(matrix[0].size(),0));
+        int maxa=0;
+        for(int i=0;i<matrix.size();i++){
+            dp[i][0]=matrix[i][0]-'0';
+             maxa=max(dp[i][0],maxa);
+        }
+        for(int i=1;i<matrix[0].size();i++){
+            dp[0][i]=matrix[0][i]-'0';
+             maxa=max(dp[0][i],maxa);
+        }
+        for(int i=1;i<dp.size();i++){
+            for(int j=1;j<dp[0].size();j++){
+                if(matrix[i][j]-'0')
+                    dp[i][j]=1+min(dp[i-1][j],min(dp[i][j-1],dp[i-1][j-1]));
+                maxa=max(dp[i][j],maxa);
+            }
+        }
+        return maxa*maxa;
+    }
 void CPwithVKD() {
 
-ll n,k,ans=0; cin>>n>>k;
-
-while(k > 0) {
-    ll curr = 0;
-    if(  (k&1) == (n&1) ) curr = min(n,k); // If the parity is same, we are filling n bits
-    else curr = min(k,n-1); //Else we are filling n-1  bits
-
-    k-=curr;
-    k/=2;
-    ans+=curr;
+ll n; cin>>n;
+ll m = n;
+loop(i,0,n){
+    ll x,y; cin>>x>>y;
+     for(int j=x;j<=y;j++){
+        graph_dp[i][j]='1';
+     }
 }
-print(ans)
 
+ll ans = maximalSquare(graph_dp);
+print(sqrt(ans))
 
+// for(int i=0;i<n;i++){
+//     for(int j=0;j<n;j++){
+//         cout<<graph_dp[i][j]<<" ";
+//     }
+//     nextline
+// }
 } 
 
 
@@ -137,7 +173,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-testLoop
+//testLoop
 
 CPwithVKD();
 

@@ -113,18 +113,15 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n,k,ans=0; cin>>n>>k;
-
-while(k > 0) {
-    ll curr = 0;
-    if(  (k&1) == (n&1) ) curr = min(n,k); // If the parity is same, we are filling n bits
-    else curr = min(k,n-1); //Else we are filling n-1  bits
-
-    k-=curr;
-    k/=2;
-    ans+=curr;
+ll n; cin>>n;
+ll arr[n];
+map(ll,ll) map;
+loop(i,0,n){
+    cin>>arr[i];
+    map[arr[i]]=i+1;
 }
-print(ans)
+for(auto i:map) cout<<i.ss<<" ";
+nextline
 
 
 } 
@@ -137,7 +134,7 @@ freopen("input.txt", "r", stdin);
 freopen("output.txt", "w", stdout);
 #endif
 
-testLoop
+// testLoop
 
 CPwithVKD();
 

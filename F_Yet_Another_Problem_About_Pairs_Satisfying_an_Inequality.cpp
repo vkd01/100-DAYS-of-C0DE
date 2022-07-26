@@ -123,6 +123,7 @@ loop(i,0,n) {
     map[arr[i]] =i;
     for(auto i : map)  cout<<i.ff<<" "<<i.ss<<endl;
 }
+
 nextline
 
 

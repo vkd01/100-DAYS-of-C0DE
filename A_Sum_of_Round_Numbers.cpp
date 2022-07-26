@@ -113,19 +113,30 @@ dfs(child);
 
 void CPwithVKD() {
 
-ll n,k,ans=0; cin>>n>>k;
+ll n; cin>>n;
+vl v;
+string s = to_string(n);
+ll len = s.size();
+ll ten = 10;
+ll mul = 1;
+loop(i,0,len){
 
-while(k > 0) {
-    ll curr = 0;
-    if(  (k&1) == (n&1) ) curr = min(n,k); // If the parity is same, we are filling n bits
-    else curr = min(k,n-1); //Else we are filling n-1  bits
-
-    k-=curr;
-    k/=2;
-    ans+=curr;
+    if(n%ten!=0) v.pb(  (n%10)*mul);
+    ten*=10;
+   mul*=10;
+   n/=10;
 }
-print(ans)
-
+ll count= 0;
+for(auto i:v) {
+    if(i!=0) count++;
+}
+cout<<count<<endl;
+for(auto i : v) {
+    if(i!=0){
+    cout<<i<<" ";
+    }
+    }
+nextline
 
 } 
 

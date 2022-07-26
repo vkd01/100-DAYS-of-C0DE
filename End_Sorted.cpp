@@ -4,24 +4,17 @@ Author : Vimal Kumar Dubey   ᗡ⋊Λ
  ! Instead of Copying my Template .....Get INSPIRED and Create a unique one //
 
 **************************************************************************************************
-PROFILE IS TEMPORARY, SKILLS ARE PERMANENT !!
-//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 Remember you were also a novice when you started, 
 hence never be rude to anyone who wants to learn something
 
+   You love to watch Doraemon ?? Oh high five .... !! 
 JUST DISCONNECT. Once in a day sometime, sit silently and from all connections, disconnect yourself.]
 
--> { / } THOSE WHO DO NOT REMEMBER THE PAST ARE CONDEMNED TO REPEAT IT ---- ?> A dynamic programming expert
+-> { / } The Two important days in your life are The day yoy are born and The day you find  out why
 
 */
 //Nothing is More Honorable than a greatful Heart //
-#undef _GLIBCXX_DEBUG //a compiler flag used to enable debug mode in gcc's C++ Standard Library implementation
-
-#ifdef LOCAL
-#include "algo/debug.h" 
-#else
-#define debug(...) 42
-#endif
+#undef _GLIBCXX_DEBUG
 
 #include<bits/stdc++.h>
 using namespace std;
@@ -65,14 +58,6 @@ msb++;
 return BIN(1,msb);
 }
 
-bool isPrime(ll n) {
-if (n <= 1) return false;
-loop(i,2,sqrt(n))
-if (n % i == 0)
-return false;
-return true;
-}
-
 ll gcd(ll a, ll b) {
 if (b == 0)
 return a;
@@ -90,40 +75,54 @@ loop(i,1,n)ans = (((arr[i] * ans)) / (gcd(arr[i], ans)));
 return ans;
 }
 
-const int N = 1e5 + 10;
-vector<ll> graph[N];
-bool visited[N];
+const int N = 1e5;
+vector<int>adj[N];
+int visited[N];
 
-void dfs(ll vertex) {
-/* Take action on vertex after entering the vertex*/
-// lineprint(vertex);
-visited[vertex] = true;
-//if (visited[vertex]) return;
-for (int child : graph[vertex]) {
-if (visited[child]) continue;
-/*Take action on child before entering the child node*/
-// cout << "par" << " " << vertex << " ," << "child" << " " << child << endl;
+void DFS(int v){
+int parent = v;
+visited[parent] = 1;
+for(int child: adj[parent]){
+if(visited[child])continue;
+DFS(child); } }
 
-dfs(child);
-
-/*Take action on child after exiting child node*/
+vector<int> bfsOfGraph(int V, vector<int> adj[]) {
+vector<int>res;
+int visited[100001] = {0};
+queue<int>q;
+q.push(0);
+visited[0] = 1;
+while(!q.empty()){
+int parent = q.front();
+q.pop();
+res.push_back(parent);
+for(int child: adj[parent]){
+if(visited[child])continue;
+q.push(child);
+visited[child] = 1;
+}}
+return res;
 }
-/*Take action on vertex before exiting the vertex*/
-}
-
 void CPwithVKD() {
 
-ll n,k,ans=0; cin>>n>>k;
-
-while(k > 0) {
-    ll curr = 0;
-    if(  (k&1) == (n&1) ) curr = min(n,k); // If the parity is same, we are filling n bits
-    else curr = min(k,n-1); //Else we are filling n-1  bits
-
-    k-=curr;
-    k/=2;
-    ans+=curr;
+ll n; cin>>n;
+ll arr[n];
+loop(i,0,n) cin>>arr[i];
+ll right =n,left = 0;
+ll tall = arr[n-1],small = arr[0];
+loop(i,0,n){
+    if(arr[i]>tall &&arr[i]!=arr[n-1]) {
+        tall = arr[i];
+        right = i+1;
+    }
+     if(arr[i]<small && arr[i]!=arr[0]) {
+        small = arr[i];
+        left = i;
+    }
 }
+//cout<<"CHECK"<<left<<right<<endl;
+ll ans = left + n-right;
+if(left>=right) ans--;
 print(ans)
 
 
